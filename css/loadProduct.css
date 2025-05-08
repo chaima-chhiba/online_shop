@@ -1,109 +1,121 @@
-/*------------------------------ product ------------------------------*/
-
-
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(4, 1fr));
-    gap: 20px;
-    padding: 20px;
-}
-
-.product-card {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.product-card img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
-
-
-.product-card h3 {
-    font-size: 1.2em;
-    margin: 10px 0;
-}
-
-.product-card p {
-    font-size: 1em;
-    color: #555;
-    margin: 5px 0 15px;
-}
-
-.product-card button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.product-card button:hover {
-    background-color: #0056b3;
-}
-
-/*---------- RESPONSIVE ---------------------*/
-/* General grid container styling */
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 products in a row */
-    gap: 20px;
-    padding: 20px;
-}
-
-/* Responsive design for smaller screens */
-@media (max-width: 1200px) {
-    .grid-container {
-        grid-template-columns: repeat(3, 1fr); /* 3 products per row */
-    }
-}
-
-@media (max-width: 768px) {
-    .grid-container {
-        grid-template-columns: repeat(2, 1fr); /* 2 products per row */
-    }
-}
-
-@media (max-width: 480px) {
-    .grid-container {
-        grid-template-columns: 1fr; /* 1 product per row */
-    }
-}
-/*----------------------------------Grid View && next button- ----------------------------------*/
-
-/* Pagination Styles */
-.pagination {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-}
-
-.pagination button {
-    padding: 10px 15px;
-    border: 1px solid #ddd;
-    background-color: white;
-    color: #333;
-    margin: 0 5px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.pagination button:hover {
-    background-color: #007bff;
-    color: white;
-}
-
-.pagination button:disabled {
-    background-color: #f1f1f1;
-    color: #bbb;
-    cursor: not-allowed;
-}
+:root {
+    --primary: #a87c50;
+    --secondary: #d9c3b0;
+    --accent: #8c5e37;
+    --light: #f5f1ec;
+    --dark: #4a3c30;
+    --header-bg: #714f31;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Lato', sans-serif;
+  }
+  
+  /*------------------------------ product ------------------------------*/
+  .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(4, 1fr));
+      gap: 20px;
+      padding: 20px;
+  }
+  
+  .product-card {
+      background-color: var(--light);
+      border: 1px solid var(--secondary);
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(74, 60, 48, 0.1);
+  }
+  
+  .product-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 10px;
+  }
+  
+  .product-card h3 {
+      font-size: 1.2em;
+      margin: 10px 0;
+      font-family: var(--font-heading);
+      color: var(--dark);
+  }
+  
+  .product-card p {
+      font-size: 1em;
+      color: var(--dark);
+      margin: 5px 0 15px;
+      font-family: var(--font-body);
+  }
+  
+  .product-card button {
+      background-color: var(--primary);
+      color: var(--light);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+  }
+  
+  .product-card button:hover {
+      background-color: var(--accent);
+  }
+  
+  /*---------- RESPONSIVE ---------------------*/
+  /* General grid container styling */
+  .grid-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 4 products in a row */
+      gap: 20px;
+      padding: 20px;
+  }
+  
+  /* Responsive design for smaller screens */
+  @media (max-width: 1200px) {
+      .grid-container {
+          grid-template-columns: repeat(3, 1fr); /* 3 products per row */
+      }
+  }
+  
+  @media (max-width: 768px) {
+      .grid-container {
+          grid-template-columns: repeat(2, 1fr); /* 2 products per row */
+      }
+  }
+  
+  @media (max-width: 480px) {
+      .grid-container {
+          grid-template-columns: 1fr; /* 1 product per row */
+      }
+  }
+  
+  /*----------------------------------Grid View && next button- ----------------------------------*/
+  /* Pagination Styles */
+  .pagination {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+  }
+  
+  .pagination button {
+      padding: 10px 15px;
+      border: 1px solid var(--secondary);
+      background-color: var(--light);
+      color: var(--dark);
+      margin: 0 5px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .pagination button:hover {
+      background-color: var(--primary);
+      color: var(--light);
+  }
+  
+  .pagination button:disabled {
+      background-color: var(--secondary);
+      color: var(--dark);
+      opacity: 0.6;
+      cursor: not-allowed;
+  }

@@ -5,31 +5,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Load Products</title>
+    <!-- Add Google Fonts for your typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/loadProduct.css">
     <link rel="stylesheet" href="../css/toast.css">
     <link rel="icon" type="image/png" href="../resource/Logo.png">
-
 </head>
 
 <body>
+    <div id="toast-container" style="position: fixed; top: 20px; right: 20px; z-index: 1000;"></div>
 
-    <!--
-    <div id="toast-container" style="position: fixed;"></div>
-    -->
+    <header class="site-header">
+        <div class="container">
+            <h1>Our Products</h1>
+        </div>
+    </header>
 
-    <div class="grid-container" id="productGrid"></div>
+    <main class="container">
+        <div class="grid-container" id="productGrid"></div>
 
-    <div class="pagination">
-        <button id="prevPage" disabled>Previous</button>
-        <button id="nextPage" disabled>Next</button>
-    </div>
-
+        <div class="pagination">
+            <button id="prevPage" disabled>Previous</button>
+            <button id="nextPage" disabled>Next</button>
+        </div>
+    </main>
 
     <script src="../js/add2cart.js"></script>
     <script src="../js/toast.js"></script>
     <script src="../js/loadProduct.js"></script>
-
 </body>
-
 
 </html>

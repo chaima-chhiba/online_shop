@@ -35,6 +35,9 @@
                     <option value="Vintage Dresses">Vintage Dresses</option>
                     <option value="Vintage Jackets">Vintage Jackets</option>
                     <option value="Vintage Tops">Vintage Tops</option>
+                    <option value="Vintage Tops">Vintage Jeans</option>
+                    <option value="Vintage Tops">Vintage Shirts</option>
+                    <option value="Vintage Tops">Vintage Skirts</option>
                 </select>
                 <div id="product_category_error" class="error-message"></div>
             </div>

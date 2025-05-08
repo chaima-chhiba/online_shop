@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Online Tech Shop Web
 
 ## Overview
@@ -133,3 +134,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Support
 For any issues or questions, please open an issue in the repository or contact the project owner.
 
+=======
+# online_shop
+>>>>>>> 949721d3b5a8f00eeff0fac9f72a30615cfb4a8c

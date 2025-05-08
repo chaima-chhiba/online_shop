@@ -1,5 +1,5 @@
-<<<<<<< HEAD
-# Online Tech Shop Web
+
+# Online vintage clothes Shop Web
 
 ## Overview
 The Online Tech Shop Web is an e-commerce platform built to provide users with a seamless shopping experience for tech products. The system includes features such as user authentication, product catalog management, and a shopping cart. Developed using HTML, CSS, PHP, JavaScript, and JSON, this platform enables secure product browsing, order management, and payment processing.
@@ -134,6 +134,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Support
 For any issues or questions, please open an issue in the repository or contact the project owner.
 
-=======
-# online_shop
->>>>>>> 949721d3b5a8f00eeff0fac9f72a30615cfb4a8c
+

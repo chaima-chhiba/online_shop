@@ -47,8 +47,8 @@ td {
 }
 
 th {
-  background-color: #ed9e59;
-  color: #fff;
+  background-color: #a87c50; /* Primary brown */
+  color: #f5f1ec; 
   font-weight: bold;
 }
 
@@ -115,8 +115,8 @@ div[style="display: flex; gap: 3px; align-items: left;"] {
 .form-container form button {
   display: block;
   width: 100%;
-  background: #4caf50;
-  color: #fff;
+  background-color: #a87c50; /* Changed to primary brown */
+  color: #f5f1ec;
   padding: 10px;
   border: none;
   border-radius: 4px;
@@ -124,7 +124,7 @@ div[style="display: flex; gap: 3px; align-items: left;"] {
 }
 
 .form-container form button:hover {
-  background: #45a049;
+  background: #8c5e37; /
 }
 
 .action-buttons {
@@ -146,11 +146,11 @@ div[style="display: flex; gap: 3px; align-items: left;"] {
 }
 
 .action-buttons button {
-  color: red;
+  color:  #8c5e37; /
 }
 
 .action-buttons a {
-  color: blue;
+  color:#a87c50;
   text-decoration: none;
 }
 

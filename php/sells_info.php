@@ -52,7 +52,7 @@ $conn->close();
         <input type="text" id="sellsSearchInput" onkeyup="sellsSearchTable()" placeholder="Search for products...">
         <div class="table-container">
 
-            <table id="sells_table" border="1">
+            <table id="sells_table">
                 <thead>
                     <tr>
                         <th>Sell ID</th>

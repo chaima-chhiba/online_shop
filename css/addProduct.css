@@ -52,10 +52,10 @@ body {
 
 .form-group input:focus,
 .form-group select:focus {
-  border-color: #4caf50;
+  border-color: #a87c50;;
   outline: none;
   background-color: #fff;
-  box-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
+  box-shadow: 0 0 5px rgba(168, 124, 80, 0.4);
 }
 
 /* File Input Styling */
@@ -68,32 +68,36 @@ body {
 
 .form-group input[type="file"]::-webkit-file-upload-button {
   padding: 10px;
-  background-color: #4caf50;
+  background-color: #d9c3b0;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .form-group input[type="file"]::-webkit-file-upload-button:hover {
-  background-color: #45a049;
+  background-color: #8c5e37;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 /* Submit Button */
 .form-group input[type="submit"] {
-  background: #4caf50;
+  background: #a87c50;
   color: white;
   border: none;
   cursor: pointer;
   padding: 12px;
   font-size: 16px;
   border-radius: 5px;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .form-group input[type="submit"]:hover {
-  background: #45a049;
+  background: #8c5e37;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 /* Responsiveness */
@@ -114,7 +118,7 @@ body {
 /* Style for the submit button */
 .submit-btn {
   width: 100%;
-  background-color: #007BFF; /* Blue background */
+  background-color: #8c5e37; /* Blue background */
   color: white; /* White text */
   font-size: 16px; /* Font size */
   padding: 12px 24px; /* Padding around the text */

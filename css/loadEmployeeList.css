@@ -37,8 +37,8 @@ td {
 }
 
 th {
-  background-color: #44174e;
-  color: #fff;
+  background-color: #a87c50; /* Primary brown */
+  color: #f5f1ec; /* Light cream */
   font-weight: bold;
 }
 
@@ -47,11 +47,11 @@ td {
 }
 
 tr:nth-child(even) td {
-  background-color: #f1f1f1;
+  background-color: #f9f9f9;
 }
 
 tr:hover {
-  background-color: #f1f1f1;
+  background-color: #d9c3b0;;
 }
 
 /* Red color for confidential data (password) */
@@ -99,19 +99,21 @@ a:hover {
 }
 
 a[title="Edit"] {
-  color: #4caf50;
+  color: #8c5e37;
 }
 
 a[title="Edit"]:hover {
-  color: #45a049;
+  color: #f5f1ec; /* Light cream */
+  background-color: #8c5e37; /* Accent darker brown */
 }
 
 a[title="Delete"] {
-  color: #f44336;
+  color: #c13c2e;
 }
 
 a[title="Delete"]:hover {
-  color: #e53935;
+  color: #f5f1ec; /* Light cream */
+  background-color: #c13c2e; /* Slightly muted red */
 }
 
 /* Ensures the buttons inside table cells are in one line */
@@ -148,7 +150,8 @@ table td a {
 
 .form-container button {
   width: 100%;
-  background-color: #4caf50;
+  background-color: #a87c50; /* Primary brown */
+  color: #f5f1ec; 
   color: white;
   padding: 10px;
   border: none;
@@ -158,7 +161,7 @@ table td a {
 }
 
 .form-container button:hover {
-  background-color: #45a049;
+  background-color: #8c5e37; 
 }
 
 /* --------- */

@@ -18,7 +18,7 @@
 }
 
 #customerSearchInput:focus {
-  border-color: #4caf50;
+  border-color: #f5f1ec;
   /* Change border color on focus */
   outline: none;
   /* Remove the default focus outline */
@@ -65,8 +65,8 @@ td {
 }
 
 th {
-  background-color: #0056b3;
-  color: #fff;
+  background-color: #a87c50; /* Primary brown */
+  color: #f5f1ec;
   font-weight: bold;
 }
 

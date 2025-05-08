@@ -32,11 +32,18 @@ body {
     border-radius: 5px;
   }
   .form-group input[type="submit"] {
-    background: #4CAF50;
+    background:#a87c50; /* Warm brown primary color */
     color: white;
     border: none;
     cursor: pointer;
-  }
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
   .form-group input[type="submit"]:hover {
-    background: #45a049;
-  }
+    background:#8c5e37; /* Darker brown accent color */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

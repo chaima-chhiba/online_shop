@@ -39,8 +39,8 @@ td {
 }
 
 th {
-  background-color: #ff7700;
-  color: #fff;
+  background-color: #a87c50; /* Primary brown */
+  color: #f5f1ec;
   font-weight: bold;
 }
 
@@ -72,7 +72,7 @@ td {
 
 /* Style for price column */
 td:nth-child(6) {
-  color: green;
+  color: #a87c50;
   font-weight: bold;
 }
 

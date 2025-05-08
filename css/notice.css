@@ -21,7 +21,7 @@ body {
 h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: #007bff;
+    color: #8c5e37;
 }
 form {
     margin-bottom: 20px;
@@ -42,16 +42,20 @@ form {
     font-size: 14px;
 }
 .form-group button {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #a87c50;
+    color:#f5f1ec;
     border: none;
     padding: 10px 20px;
     font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 .form-group button:hover {
-    background-color: #0056b3;
+    background-color: #a87c50; /* Primary brown on hover */
+    color: #f5f1ec;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 .message {
     text-align: center;

@@ -68,7 +68,7 @@ if ($result) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notice Management</title>
-    <link rel="stylesheet" href="../css/notice.css">
+    <link rel="stylesheet" href="../css/notice.css?v=<?php echo time(); ?>">
     <script>
         function confirmDelete(noticeId) {
             if (confirm("Are you sure you want to delete this notice?")) {

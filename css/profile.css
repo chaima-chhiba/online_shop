@@ -59,7 +59,8 @@
     /* Profile Details Styling */
     .info-box p span {
         font-weight: bold;
-        color: #007BFF;
+        color: #a87c50;
+
     }
 
     /* Error/Not Found Message */
@@ -71,7 +72,8 @@
 
     /* Link Styling */
     a {
-        color: #007BFF;
+        color: #a87c50;
+
         text-decoration: none;
     }
 

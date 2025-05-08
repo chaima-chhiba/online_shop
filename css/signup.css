@@ -1,116 +1,182 @@
-/* Reset margins and padding for all elements */
+/* signup.css */
+:root {
+  --primary: #a87c50;
+  --secondary: #d9c3b0;
+  --accent: #8c5e37;
+  --light: #f5f1ec;
+  --dark: #2c2418;
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Lato', sans-serif;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Body Styling */
 body {
-  background-color: #5f84ab;
-  font-family: "Arial", sans-serif;
+  font-family: var(--font-body);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  margin: 0;
+  min-height: 100vh;
+  background-color: var(--light);
+  color: var(--dark);
+  line-height: 1.6;
+  background-image: url('../resource/antique-pattern.png');
+  background-size: cover;
+  background-blend-mode: overlay;
+  background-color: rgba(245, 241, 236, 0.9);
+  padding: 20px;
 }
 
-/* Signup Form Container */
 .signup-container {
   background-color: #fff;
-  padding: 40px 30px;
+  padding: 40px;
   border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(44, 36, 24, 0.15);
   width: 100%;
-  max-width: 420px;
+  max-width: 500px;
+  border: 1px solid var(--secondary);
+  position: relative;
+  overflow: hidden;
 }
 
-/* Heading Style */
-.signup-container h1 {
+.signup-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background-color: var(--primary);
+}
+
+.signup-container h1,
+.signup-container p[style*="font-size: 24px"] {
   text-align: center;
-  color: #333;
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 20px;
+  color: var(--primary);
+  font-size: 2rem;
+  font-family: var(--font-heading);
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+  font-weight: 600;
 }
 
-/* Label and Input Field Styling */
+.signup-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
 .signup-container label {
   display: block;
-  font-weight: bold;
-  color: #555;
-  font-size: 14px;
+  font-weight: 500;
+  color: var(--dark);
+  font-size: 1rem;
   margin-bottom: 5px;
 }
 
-/* Input Field Styling */
 .signup-container input {
   width: 100%;
-  padding: 12px;
-  font-size: 14px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+  padding: 12px 15px;
+  font-size: 16px;
+  margin-bottom: 5px;
+  border: 1px solid var(--secondary);
+  border-radius: 4px;
+  background-color: var(--light);
+  transition: all 0.3s ease;
+  font-family: var(--font-body);
 }
 
-/* Input Focus Effect */
 .signup-container input:focus {
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  border-color: var(--primary);
+  box-shadow: 0 0 5px rgba(168, 124, 80, 0.5);
 }
 
-/* Button Styling */
+.signup-container input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 11px 15px;
+}
+
 .signup-container .div-btn {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .signup-container button {
-  background-color: #007bff;
-  color: #fff;
+  background-color: var(--primary);
+  color: var(--light);
   border: none;
-  padding: 12px 20px;
+  padding: 12px;
   font-size: 16px;
-  border-radius: 5px;
+  font-weight: 500;
+  border-radius: 25px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  width: 80%;
+  letter-spacing: 0.5px;
 }
 
 .signup-container button:hover {
-  background-color: #0056b3;
+  background-color: var(--accent);
+  width: 100%;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(140, 94, 55, 0.3);
 }
 
-/* Back to Login Link Styling */
 .signup-container .back-to-lo {
   text-align: center;
-  font-size: 14px;
-  margin-top: 20px;
+  font-size: 0.95rem;
+  margin-top: 25px;
+  color: var(--dark);
 }
 
 .signup-container .back-to-lo a {
-  color: #007bff;
+  color: var(--primary);
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin-left: 5px;
 }
 
 .signup-container .back-to-lo a:hover {
+  color: var(--accent);
   text-decoration: underline;
 }
 
 /* Responsive Design */
-@media (max-width: 500px) {
+@media (max-width: 768px) {
   .signup-container {
-    padding: 30px 20px;
+      padding: 30px;
   }
-
-  .signup-container h1 {
-    font-size: 24px;
+  
+  .signup-container h1,
+  .signup-container p[style*="font-size: 24px"] {
+      font-size: 1.8rem;
   }
+}
 
+@media (max-width: 480px) {
+  .signup-container {
+      padding: 25px 20px;
+  }
+  
+  .signup-container h1,
+  .signup-container p[style*="font-size: 24px"] {
+      font-size: 1.6rem;
+  }
+  
+  .signup-container input {
+      padding: 10px 12px;
+      font-size: 15px;
+  }
+  
   .signup-container button {
-    font-size: 14px;
+      padding: 10px;
+      font-size: 15px;
   }
 }

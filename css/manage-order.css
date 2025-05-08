@@ -8,7 +8,7 @@ body {
 }
 
 header {
-    background-color: #036666;
+    background-color: #a87c50;
     color: white;
     text-align: center;
     padding: 1em;
@@ -25,7 +25,7 @@ header h1 {
     top: 20px;
     right: 20px;
     background-color: #f4f4f4;
-    color: #036666;
+    color: #a87c50;
     border: none;
     padding: 10px 15px;
     border-radius: 5px;
@@ -65,7 +65,7 @@ header h1 {
 
 .search-form button {
     padding: 10px 15px;
-    background-color: #036666;
+    background-color: #a87c50;
     color: white;
     border: none;
     border-radius: 5px;
@@ -73,7 +73,8 @@ header h1 {
 }
 
 .search-form button:hover {
-    background-color: #025252;
+    background-color:#f5f1ec;
+
 }
 
 /* Order Table */
@@ -90,7 +91,7 @@ header h1 {
 }
 
 .order-table th {
-    background-color: #036666;
+    background-color:#a87c50;
     color: white;
 }
 

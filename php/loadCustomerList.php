@@ -1,7 +1,6 @@
 <?php
 // Database configuration
 include 'db_connection.php';
-
 // Create a connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -16,6 +15,12 @@ $result = $conn->query($sql);
 
 echo "<h1>Customer Information</h1>";
 ?>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Information</title>
+    <link rel="stylesheet" href="../css/loadCustomerList.css?v=<?php echo time(); ?>">
+</head>
 
 <!-- Search Box -->
 <input type="text" id="customerSearchInput" onkeyup="customerSearchTable()" placeholder="Search for customers...">
@@ -55,7 +60,7 @@ if ($result->num_rows > 0) {
 $conn->close();
 ?>
 
+</html>
 
 <script src="../js/search_table.js"></script>
 
-<link rel="stylesheet" href="../css/loadCustomerList.css">

@@ -125,7 +125,6 @@ if (isset($_GET['edit_product_id'])) {
                                         <form method="GET" action="" style="display: inline;">
                                             <input type="hidden" name="edit_product_id" value="<?= $row['product_id'] ?>">
                                             <button type="submit" name="edit_product"
-                                                style="font-size: 18px; color: #ff9800; border: none; background: none; cursor: pointer;"
                                                 title="Edit">✏️</button>
                                         </form>
 
@@ -134,7 +133,6 @@ if (isset($_GET['edit_product_id'])) {
                                             <input type="hidden" name="product_id" value="<?= $row['product_id'] ?>">
                                             <button type="submit" name="delete_product"
                                                 onclick="return confirm('Are you sure you want to delete this product?')"
-                                                style="font-size: 18px; color: #f44336; border: none; background: none; cursor: pointer;"
                                                 title="Delete">❌</button>
                                         </form>
                                     </div>

@@ -38,5 +38,45 @@
         "product_price": "50.00",
         "product_quantity": "1",
         "product_location": "..\/product_img\/p59.jpeg"
+    },
+    {
+        "product_id": "0006",
+        "product_category": "Vintage Tops",
+        "product_name": "mini vintage skirt",
+        "product_price": "80.00",
+        "product_quantity": "6",
+        "product_location": "..\/product_img\/p60.jpeg"
+    },
+    {
+        "product_id": "0007",
+        "product_category": "Vintage Dresses",
+        "product_name": "1970s Pale Light  Cotton Voil",
+        "product_price": "90.00",
+        "product_quantity": "2",
+        "product_location": "..\/product_img\/p61.jpeg"
+    },
+    {
+        "product_id": "0008",
+        "product_category": "Vintage Dresses",
+        "product_name": "move dress",
+        "product_price": "50.00",
+        "product_quantity": "5",
+        "product_location": "..\/product_img\/p63.jpeg"
+    },
+    {
+        "product_id": "0009",
+        "product_category": "Vintage Tops",
+        "product_name": "clasic black jean",
+        "product_price": "120.00",
+        "product_quantity": "8",
+        "product_location": "..\/product_img\/p64.jpeg"
+    },
+    {
+        "product_id": "0010",
+        "product_category": "Vintage Jackets",
+        "product_name": "Rachel Green inspired jacket",
+        "product_price": "160.00",
+        "product_quantity": "1",
+        "product_location": "..\/product_img\/p65.jpeg"
     }
 ]

@@ -149,73 +149,103 @@ document.addEventListener("DOMContentLoaded", () => {
 // validation.js
 
 // validation.js
-
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.querySelector("form");
+  const form = document.getElementById("productForm");
+  
+  if (!form) {
+      console.error("Form not found!");
+      return;
+  }
+
+  // Form elements
   const productIdInput = document.getElementById("product_id");
   const categoryInput = document.getElementById("product_category");
   const nameInput = document.getElementById("product_name");
   const priceInput = document.getElementById("product_price");
   const quantityInput = document.getElementById("product_quantity");
+  const imageInput = document.getElementById("product_image");
+
+  // Check if elements exist
+  if (!productIdInput || !categoryInput || !nameInput || !priceInput || !quantityInput || !imageInput) {
+      console.error("One or more form elements are missing!");
+      return;
+  }
 
   form.addEventListener("submit", (event) => {
-    let isValid = true;
-
-    // Helper function to check if a field is empty or only spaces
-    const isEmptyOrSpaces = (str) => str.trim().length === 0;
-
-    // Validate product ID
-    const productId = productIdInput.value.trim();
-    const productIdRegex = /^[0-9]+$/; // Numbers only
-    if (isEmptyOrSpaces(productId) || !productIdRegex.test(productId)) {
-      alert(
-        "Product ID must contain only numbers and cannot be empty or spaces."
-      );
-      isValid = false;
-    }
-
-    // Validate product category
-    const category = categoryInput.value.trim();
-    const categoryRegex = /^[a-zA-Z]{1,20}$/; // Letters and spaces, max 20 chars
-    if (isEmptyOrSpaces(category) || !categoryRegex.test(category)) {
-      isValid = false;
-    }
-
-    // Validate product name
-    const name = nameInput.value.trim();
-    if (isEmptyOrSpaces(name) || name.length < 3 || name.length > 100) {
-      isValid = false;
-    }
-
-    // Validate product price
-    const price = parseFloat(priceInput.value.trim());
-    if (isNaN(price) || price <= 0) {
-      // alert("Product price must be a positive number.");
-      isValid = false;
-    }
-    // Validate product price
-    // const price = priceInput.value.trim();
-    // if ((isEmptyOrSpaces(price) || isNaN(price) ) || price >= 0) {
-    //     isValid = false;
-    // }
-
-    // Validate product quantity
-    const quantity = quantityInput.value.trim();
-    if (
-      isEmptyOrSpaces(quantity) ||
-      isNaN(quantity) ||
-      quantity <= 0 ||
-      !Number.isInteger(parseFloat(quantity))
-    ) {
-      isValid = false;
-    }
-
-    // If any validation fails, prevent form submission
-    if (!isValid) {
       event.preventDefault();
-      alert("Invalid information try again");
-    } else {
-      alert("successfully added product");
-    }
+      let isValid = true;
+      
+      // Clear previous errors
+      document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+      document.querySelectorAll('input, select').forEach(el => el.classList.remove('error-field'));
+      
+      // Helper functions
+      const isEmptyOrSpaces = (str) => str.trim().length === 0;
+      const showError = (inputElement, message) => {
+          const errorElement = document.getElementById(`${inputElement.id}_error`);
+          errorElement.textContent = message;
+          inputElement.classList.add('error-field');
+          isValid = false;
+      };
+
+      // Validate product ID
+      const productId = productIdInput.value.trim();
+      const productIdRegex = /^[0-9]+$/;
+      if (isEmptyOrSpaces(productId)) {
+          showError(productIdInput, "Product ID cannot be empty");
+      } else if (!productIdRegex.test(productId)) {
+          showError(productIdInput, "Product ID must contain only numbers");
+      }
+
+      // Validate product category
+      const category = categoryInput.value;
+      if (category === "") {
+          showError(categoryInput, "Please select a category");
+      }
+
+      // Validate product name
+      const name = nameInput.value.trim();
+      if (isEmptyOrSpaces(name)) {
+          showError(nameInput, "Product name cannot be empty");
+      } else if (name.length < 3 || name.length > 100) {
+          showError(nameInput, "Product name must be 3-100 characters");
+      }
+
+      // Validate product price
+      const price = parseFloat(priceInput.value);
+      if (isNaN(price)) {
+          showError(priceInput, "Price must be a number");
+      } else if (price <= 0) {
+          showError(priceInput, "Price must be greater than 0");
+      }
+
+      // Validate product quantity
+      const quantity = parseInt(quantityInput.value);
+      if (isNaN(quantity)) {
+          showError(quantityInput, "Quantity must be a whole number");
+      } else if (quantity <= 0) {
+          showError(quantityInput, "Quantity must be greater than 0");
+      } else if (!Number.isInteger(quantity)) {
+          showError(quantityInput, "Quantity must be a whole number (no decimals)");
+      }
+
+      // Validate product image
+      const image = imageInput.files[0];
+      if (!image) {
+          showError(imageInput, "Please upload a product image");
+      } else {
+          const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
+          if (!validTypes.includes(image.type)) {
+              showError(imageInput, "Please upload a valid image (JPEG, PNG, GIF)");
+          }
+          if (image.size > 2 * 1024 * 1024) { // 2MB limit
+              showError(imageInput, "Image size must be less than 2MB");
+          }
+      }
+
+      if (isValid) {
+          alert("Product successfully validated!");
+          form.submit();
+      }
   });
 });

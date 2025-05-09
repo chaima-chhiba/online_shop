@@ -25,7 +25,7 @@ async function loadProducts(page = 1) {
         productCard.innerHTML = `
                     <img src="${product.product_location}" alt="${product.product_name}">
                     <h3>${product.product_name}</h3>
-                    <p>৳ ${product.product_price}</p>
+                    <p>TND ${product.product_price}</p>
                     <button 
                         class="add-to-cart-button" 
                         data-product-id="${product.product_id}" 

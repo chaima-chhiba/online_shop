@@ -1,57 +1,73 @@
 <?php
 include 'db_connection.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+try {
+    // Create a PDO connection
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    // Set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_employee'])) {
+        $employee_id = $_POST['employee_id'];
+        $employee_mobile_number = $_POST['employee_mobile_number'];
+        $employee_email = $_POST['employee_email'];
+        $employee_name = $_POST['employee_name'];
+        $employee_gender = $_POST['employee_gender'];
+        $employee_address = $_POST['employee_address'];
+        $employee_role = $_POST['employee_role'];
+        $employee_salary = $_POST['employee_salary'];
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_employee'])) {
-    $employee_id = $_POST['employee_id'];
-    $employee_mobile_number = $_POST['employee_mobile_number'];
-    $employee_email = $_POST['employee_email'];
-    $employee_name = $_POST['employee_name'];
-    $employee_gender = $_POST['employee_gender'];
-    $employee_address = $_POST['employee_address'];
-    $employee_role = $_POST['employee_role'];
-    $employee_salary = $_POST['employee_salary'];
+        $sql = "UPDATE employee SET 
+                employee_mobile_number = :mobile_number,
+                employee_email = :email,
+                employee_name = :name,
+                employee_gender = :gender,
+                employee_address = :address,
+                employee_role = :role,
+                employee_salary = :salary
+                WHERE employee_id = :id";
 
-    $sql = "UPDATE employee SET 
-            employee_mobile_number = '$employee_mobile_number',
-            employee_email = '$employee_email',
-            employee_name = '$employee_name',
-            employee_gender = '$employee_gender',
-            employee_address = '$employee_address',
-            employee_role = '$employee_role',
-            employee_salary = '$employee_salary'
-            WHERE employee_id = '$employee_id'";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':mobile_number', $employee_mobile_number);
+        $stmt->bindParam(':email', $employee_email);
+        $stmt->bindParam(':name', $employee_name);
+        $stmt->bindParam(':gender', $employee_gender);
+        $stmt->bindParam(':address', $employee_address);
+        $stmt->bindParam(':role', $employee_role);
+        $stmt->bindParam(':salary', $employee_salary);
+        $stmt->bindParam(':id', $employee_id);
 
-    if ($conn->query($sql) === TRUE) {
-        echo "<script>alert('Employee updated successfully!');</script>";
-    } else {
-        echo "<script>alert('Error updating employee: " . $conn->error . "');</script>";
+        if ($stmt->execute()) {
+            echo "<script>alert('Employee updated successfully!');</script>";
+        } else {
+            echo "<script>alert('Error updating employee');</script>";
+        }
     }
-}
 
-// Handle the delete functionality
-if (isset($_GET['delete_id'])) {
-    $delete_id = $_GET['delete_id'];
-    $delete_sql = "DELETE FROM employee WHERE employee_id = '$delete_id'";
+    // Handle the delete functionality
+    if (isset($_GET['delete_id'])) {
+        $delete_id = $_GET['delete_id'];
+        $delete_sql = "DELETE FROM employee WHERE employee_id = :id";
+        $stmt = $conn->prepare($delete_sql);
+        $stmt->bindParam(':id', $delete_id);
 
-    if ($conn->query($delete_sql) === TRUE) {
-        echo "<script>alert('Employee deleted successfully!');</script>";
-        // Redirect to avoid resubmission after refresh
-        header("Location: " . $_SERVER['PHP_SELF']); // Redirect to the same page
-        exit; // Ensure no further code is executed after the redirect
-    } else {
-        echo "<script>alert('Error deleting employee: " . $conn->error . "');</script>";
+        if ($stmt->execute()) {
+            echo "<script>alert('Employee deleted successfully!');</script>";
+            // Redirect to avoid resubmission after refresh
+            header("Location: " . $_SERVER['PHP_SELF']);
+            exit;
+        } else {
+            echo "<script>alert('Error deleting employee');</script>";
+        }
     }
-}
 
-// Fetch employee data
-$sql = "SELECT * FROM employee";
-$result = $conn->query($sql);
+    // Fetch employee data
+    $sql = "SELECT * FROM employee";
+    $stmt = $conn->query($sql);
+    $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch(PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
+}
 ?>
 
 <!DOCTYPE html>
@@ -63,20 +79,18 @@ $result = $conn->query($sql);
     <title>Employee Management</title>
     <link rel="stylesheet" href="../css/loadEmployeeList.css">
     <script src="../js/search_table.js" defer></script>
-
 </head>
 
 <body>
     <div class="main-container">
         <div class="container">
-
             <div class="table-container">
                 <h1>Employee Information</h1>
 
                 <!-- Search Box -->
                 <input type="text" class="searchBox" id="EmployeeSearchBox" onkeyup="employeeSearchTable()" placeholder="Search employees...">
 
-                <?php if ($result->num_rows > 0): ?>
+                <?php if (count($employees) > 0): ?>
                     <table id="employeeTable">
                         <thead>
                             <tr>
@@ -95,7 +109,7 @@ $result = $conn->query($sql);
                             </tr>
                         </thead>
                         <tbody>
-                            <?php while ($row = $result->fetch_assoc()): ?>
+                            <?php foreach ($employees as $row): ?>
                                 <tr>
                                     <td><?= htmlspecialchars($row['employee_id']) ?></td>
                                     <td style="color:red;">Confidential</td>
@@ -115,7 +129,7 @@ $result = $conn->query($sql);
                                             onclick="return confirm('Are you sure you want to delete this employee?')">❌</a>
                                     </td>
                                 </tr>
-                            <?php endwhile; ?>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 <?php else: ?>
@@ -127,31 +141,34 @@ $result = $conn->query($sql);
             <div class="form-container">
                 <h2>Update Employee</h2>
                 <?php
+                $edit_row = [];
                 if (isset($_GET['edit_id'])) {
                     $edit_id = $_GET['edit_id'];
-                    $edit_query = "SELECT * FROM employee WHERE employee_id = '$edit_id'";
-                    $edit_result = $conn->query($edit_query);
-                    $edit_row = $edit_result->fetch_assoc();
+                    $edit_query = "SELECT * FROM employee WHERE employee_id = :id";
+                    $edit_stmt = $conn->prepare($edit_query);
+                    $edit_stmt->bindParam(':id', $edit_id);
+                    $edit_stmt->execute();
+                    $edit_row = $edit_stmt->fetch(PDO::FETCH_ASSOC);
                 }
                 ?>
                 <form method="POST" action="">
                     <label for="employee_id">Employee ID</label>
                     <input type="text" id="employee_id" name="employee_id"
-                        value="<?= isset($edit_row['employee_id']) ? $edit_row['employee_id'] : '' ?>" disabled>
+                        value="<?= isset($edit_row['employee_id']) ? htmlspecialchars($edit_row['employee_id']) : '' ?>" disabled>
                     <input type="hidden" name="employee_id"
-                        value="<?= isset($edit_row['employee_id']) ? $edit_row['employee_id'] : '' ?>">
+                        value="<?= isset($edit_row['employee_id']) ? htmlspecialchars($edit_row['employee_id']) : '' ?>">
 
                     <label for="employee_mobile_number">Mobile Number</label>
                     <input type="text" id="employee_mobile_number" name="employee_mobile_number"
-                        value="<?= isset($edit_row['employee_mobile_number']) ? $edit_row['employee_mobile_number'] : '' ?>" required>
+                        value="<?= isset($edit_row['employee_mobile_number']) ? htmlspecialchars($edit_row['employee_mobile_number']) : '' ?>" required>
 
                     <label for="employee_email">Email</label>
                     <input type="email" id="employee_email" name="employee_email"
-                        value="<?= isset($edit_row['employee_email']) ? $edit_row['employee_email'] : '' ?>" required>
+                        value="<?= isset($edit_row['employee_email']) ? htmlspecialchars($edit_row['employee_email']) : '' ?>" required>
 
                     <label for="employee_name">Name</label>
                     <input type="text" id="employee_name" name="employee_name"
-                        value="<?= isset($edit_row['employee_name']) ? $edit_row['employee_name'] : '' ?>" required>
+                        value="<?= isset($edit_row['employee_name']) ? htmlspecialchars($edit_row['employee_name']) : '' ?>" required>
 
                     <label for="employee_gender">Gender</label>
                     <select id="employee_gender" name="employee_gender">
@@ -162,7 +179,7 @@ $result = $conn->query($sql);
 
                     <label for="employee_address">Address</label>
                     <input type="text" id="employee_address" name="employee_address"
-                        value="<?= isset($edit_row['employee_address']) ? $edit_row['employee_address'] : '' ?>" required>
+                        value="<?= isset($edit_row['employee_address']) ? htmlspecialchars($edit_row['employee_address']) : '' ?>" required>
 
                     <label for="employee_role">Role</label>
                     <select id="employee_role" name="employee_role" required>
@@ -173,7 +190,7 @@ $result = $conn->query($sql);
 
                     <label for="employee_salary">Salary</label>
                     <input type="number" id="employee_salary" name="employee_salary"
-                        value="<?= isset($edit_row['employee_salary']) ? $edit_row['employee_salary'] : '' ?>"
+                        value="<?= isset($edit_row['employee_salary']) ? htmlspecialchars($edit_row['employee_salary']) : '' ?>"
                         step="0.01" required>
 
                     <button type="submit" name="update_employee">Update Employee</button>
@@ -182,7 +199,9 @@ $result = $conn->query($sql);
         </div>
     </div>
 </body>
-
 </html>
 
-<?php $conn->close(); ?>
+<?php 
+// Close connection
+$conn = null;
+?>

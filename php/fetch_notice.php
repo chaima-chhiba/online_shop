@@ -2,20 +2,25 @@
 // fetch_notices.php
 include 'db_connection.php';
 
-// Fetch all notices
-$sql = "SELECT * FROM notice";
-$result = mysqli_query($conn, $sql);
+header('Content-Type: application/json');
 
-if ($result && mysqli_num_rows($result) > 0) {
-    $notices = [];
-    while ($row = mysqli_fetch_assoc($result)) {
-        $notices[] = $row;
-    }
-    echo json_encode($notices); 
-} else {
-    echo json_encode([]);
+try {
+    // Create PDO connection
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+
+    // Fetch all notices
+    $stmt = $conn->query("SELECT * FROM notice");
+    $notices = $stmt->fetchAll();
+
+    echo json_encode($notices ?: []);
+
+} catch(PDOException $e) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Database error occurred']);
+} finally {
+    // Close connection
+    $conn = null;
 }
-
-// Close the connection
-mysqli_close($conn);
 ?>

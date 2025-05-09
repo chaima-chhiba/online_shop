@@ -1,12 +1,14 @@
 <?php
 $servername = "localhost";
-$username = "root";  
-$password = "";      
-$dbname = "online_tech_shop";  
+$username = "root";
+$password = "";
+$dbname = "online_tech_shop";
 
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    // Set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch(PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
 }
 ?>

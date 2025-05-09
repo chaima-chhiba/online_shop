@@ -78,5 +78,13 @@
         "product_price": "160.00",
         "product_quantity": "1",
         "product_location": "..\/product_img\/p65.jpeg"
+    },
+    {
+        "product_id": "0011",
+        "product_category": "Vintage Tops",
+        "product_name": "burgundy blouse",
+        "product_price": "90.00",
+        "product_quantity": "8",
+        "product_location": "..\/product_img\/p66.jpeg"
     }
 ]

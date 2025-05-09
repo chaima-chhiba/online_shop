@@ -2,70 +2,87 @@
 // Database configuration
 include 'db_connection.php';
 
-// Create a connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Handle form submission for updating and deleting products
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['update_product'])) {
-        // Update product
-        $product_id = $_POST['product_id'];
-        $product_category = $_POST['product_category'];
-        $product_name = $_POST['product_name'];
-        $product_price = $_POST['product_price'];
-        $product_quantity = $_POST['product_quantity'];
-
-        // SQL UPDATE query
-        $sql = "UPDATE product 
-                SET product_category = '$product_category', 
-                    product_name = '$product_name', 
-                    product_price = '$product_price', 
-                    product_quantity = '$product_quantity' 
-                WHERE product_id = '$product_id'";
-
-        if ($conn->query($sql) === TRUE) {
-            echo "<script>alert('Product updated successfully!');</script>";
-        } else {
-            echo "<script>alert('Error: " . $conn->error . "');</script>";
-        }
-    }
-
-    if (isset($_POST['delete_product'])) {
-        // Delete product
-        $product_id = $_POST['product_id'];
-
-        // SQL DELETE query
-        $sql = "DELETE FROM product WHERE product_id = '$product_id'";
-
-        if ($conn->query($sql) === TRUE) {
-            echo "<script>alert('Product deleted successfully!');</script>";
-        } else {
-            echo "<script>alert('Product not deleted: " . $conn->error . "');</script>";
-        }
-    }
-}
-
-// Fetch product data
-$sql = "SELECT * FROM product";
-$result = $conn->query($sql);
-
-// Fetch product for edit
+// Initialize variables for messages and product data
+$message = "";
+$alertType = "";
 $editProductData = null;
-if (isset($_GET['edit_product_id'])) {
-    $editProductId = $_GET['edit_product_id'];
-    $editSql = "SELECT * FROM product WHERE product_id = '$editProductId'";
-    $editResult = $conn->query($editSql);
 
-    if ($editResult && $editResult->num_rows > 0) {
-        $editProductData = $editResult->fetch_assoc();
-    } else {
-        echo "<script>alert('Product not found!');</script>";
+try {
+    // Handle form submission for updating and deleting products
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (isset($_POST['update_product'])) {
+            // Update product
+            $product_id = $_POST['product_id'];
+            $product_category = $_POST['product_category'];
+            $product_name = $_POST['product_name'];
+            $product_price = $_POST['product_price'];
+            $product_quantity = $_POST['product_quantity'];
+
+            // SQL UPDATE query with prepared statement
+            $stmt = $conn->prepare("UPDATE product 
+                    SET product_category = :category, 
+                        product_name = :name, 
+                        product_price = :price, 
+                        product_quantity = :quantity 
+                    WHERE product_id = :id");
+            
+            // Bind parameters
+            $stmt->bindParam(':category', $product_category);
+            $stmt->bindParam(':name', $product_name);
+            $stmt->bindParam(':price', $product_price);
+            $stmt->bindParam(':quantity', $product_quantity);
+            $stmt->bindParam(':id', $product_id);
+            
+            // Execute the statement
+            if ($stmt->execute()) {
+                $message = "Product updated successfully!";
+                $alertType = "success";
+            } else {
+                $message = "Error updating product.";
+                $alertType = "error";
+            }
+        }
+
+        if (isset($_POST['delete_product'])) {
+            // Delete product
+            $product_id = $_POST['product_id'];
+
+            // SQL DELETE query with prepared statement
+            $stmt = $conn->prepare("DELETE FROM product WHERE product_id = :id");
+            $stmt->bindParam(':id', $product_id);
+            
+            if ($stmt->execute()) {
+                $message = "Product deleted successfully!";
+                $alertType = "success";
+            } else {
+                $message = "Error deleting product.";
+                $alertType = "error";
+            }
+        }
     }
+
+    // Fetch product data
+    $stmt = $conn->prepare("SELECT * FROM product");
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Fetch product for edit
+    if (isset($_GET['edit_product_id'])) {
+        $editProductId = $_GET['edit_product_id'];
+        $stmt = $conn->prepare("SELECT * FROM product WHERE product_id = :id");
+        $stmt->bindParam(':id', $editProductId);
+        $stmt->execute();
+        
+        if ($stmt->rowCount() > 0) {
+            $editProductData = $stmt->fetch(PDO::FETCH_ASSOC);
+        } else {
+            $message = "Product not found!";
+            $alertType = "error";
+        }
+    }
+} catch (PDOException $e) {
+    $message = "Database error: " . $e->getMessage();
+    $alertType = "error";
 }
 ?>
 
@@ -78,14 +95,32 @@ if (isset($_GET['edit_product_id'])) {
     <title>Product List and Update Form</title>
     <link rel="stylesheet" href="../css/loadProductList.css">
     <script src="../js/search_table.js" defer></script>
-
-
-
+    <style>
+        .alert {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
 </head>
 
 <body>
 
     <div class="container">
+        <?php if ($message): ?>
+            <div class="alert alert-<?= $alertType ?>">
+                <?= htmlspecialchars($message) ?>
+            </div>
+        <?php endif; ?>
+        
         <!-- Product List -->
         <div class="product-list">
             <h2>Product List</h2>
@@ -93,7 +128,7 @@ if (isset($_GET['edit_product_id'])) {
             <!-- Search Box -->
             <input type="text" id="productSearchInput" onkeyup="productSearchTable()" placeholder="Search for products...">
 
-            <?php if ($result->num_rows > 0): ?>
+            <?php if (!empty($result)): ?>
                 <table id="productTable">
                     <thead>
                         <tr>
@@ -107,7 +142,7 @@ if (isset($_GET['edit_product_id'])) {
                         </tr>
                     </thead>
                     <tbody>
-                        <?php while ($row = $result->fetch_assoc()): ?>
+                        <?php foreach ($result as $row): ?>
                             <tr>
                                 <td><?= htmlspecialchars($row['product_id']) ?></td>
                                 <td><?= htmlspecialchars($row['product_category']) ?></td>
@@ -138,7 +173,7 @@ if (isset($_GET['edit_product_id'])) {
                                     </div>
                                 </td>
                             </tr>
-                        <?php endwhile; ?>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             <?php else: ?>
@@ -180,5 +215,3 @@ if (isset($_GET['edit_product_id'])) {
 </body>
 
 </html>
-
-<?php $conn->close(); ?>

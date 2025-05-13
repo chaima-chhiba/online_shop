@@ -1,90 +1,114 @@
 [
     {
         "product_id": "0001",
-        "product_category": "Vintage Dresses",
-        "product_name": "Swing Dress",
-        "product_price": "150.00",
-        "product_quantity": "4",
-        "product_location": "..\/product_img\/p55.jpg"
+        "product_category": "Arduino ",
+        "product_name": "Arduino Pro Micro",
+        "product_price": 500,
+        "product_quantity": 3,
+        "product_location": "..\/product_img\/p38.png"
+    },
+    {
+        "product_id": "00010",
+        "product_category": "Arduino ",
+        "product_name": "Heat Sink Set",
+        "product_price": 50,
+        "product_quantity": 4,
+        "product_location": "..\/product_img\/p50.png"
     },
     {
         "product_id": "0002",
-        "product_category": "Vintage Jackets",
-        "product_name": "1980s Harley Davidson Motorcycle Jacket",
-        "product_price": "75.00",
-        "product_quantity": "6",
-        "product_location": "..\/product_img\/p56.jpeg"
+        "product_category": "Arduino ",
+        "product_name": "GPS Module GY-GPSV3 NEO-8M with Ceramic Active Antenna",
+        "product_price": 450,
+        "product_quantity": 5,
+        "product_location": "..\/product_img\/p39.png"
     },
     {
         "product_id": "0003",
-        "product_category": "Vintage Tops",
-        "product_name": "Majestic Top",
-        "product_price": "60.00",
-        "product_quantity": "2",
-        "product_location": "..\/product_img\/p57.jpeg"
+        "product_category": "Arduino ",
+        "product_name": "TDS Sensor",
+        "product_price": 300,
+        "product_quantity": 4,
+        "product_location": "..\/product_img\/p41.png"
     },
     {
         "product_id": "0004",
-        "product_category": "Vintage Tops",
-        "product_name": "1970s High-Waisted Flared Jeans (Vintage Levi\u2019s)",
-        "product_price": "200.00",
-        "product_quantity": "3",
-        "product_location": "..\/product_img\/p58.jpg"
+        "product_category": "Arduino ",
+        "product_name": "Bluetooth module",
+        "product_price": 300,
+        "product_quantity": 4,
+        "product_location": "..\/product_img\/p42.png"
     },
     {
         "product_id": "0005",
-        "product_category": "Vintage Tops",
-        "product_name": "Khaki 1930s Plants Double Mesh Fishtail Skirt",
-        "product_price": "50.00",
-        "product_quantity": "1",
-        "product_location": "..\/product_img\/p59.jpeg"
+        "product_category": "Arduino ",
+        "product_name": "DHT11 Temperature and Humidity Sensor",
+        "product_price": 250,
+        "product_quantity": 3,
+        "product_location": "..\/product_img\/p43.png"
     },
     {
         "product_id": "0006",
-        "product_category": "Vintage Tops",
-        "product_name": "mini vintage skirt",
-        "product_price": "80.00",
-        "product_quantity": "6",
-        "product_location": "..\/product_img\/p60.jpeg"
+        "product_category": "Arduino ",
+        "product_name": "GY-906 Infrared Temperature Sensor",
+        "product_price": 1300,
+        "product_quantity": 4,
+        "product_location": "..\/product_img\/p45.png"
     },
     {
         "product_id": "0007",
-        "product_category": "Vintage Dresses",
-        "product_name": "1970s Pale Light  Cotton Voil",
-        "product_price": "90.00",
-        "product_quantity": "2",
-        "product_location": "..\/product_img\/p61.jpeg"
+        "product_category": "Arduino ",
+        "product_name": "Speed Detecting Sensor",
+        "product_price": 200,
+        "product_quantity": 3,
+        "product_location": "..\/product_img\/p46.png"
     },
     {
         "product_id": "0008",
-        "product_category": "Vintage Dresses",
-        "product_name": "move dress",
-        "product_price": "50.00",
-        "product_quantity": "5",
-        "product_location": "..\/product_img\/p63.jpeg"
+        "product_category": "Arduino ",
+        "product_name": "RF Transmitter Receiver Pair",
+        "product_price": 150,
+        "product_quantity": 3,
+        "product_location": "..\/product_img\/p47.png"
     },
     {
         "product_id": "0009",
-        "product_category": "Vintage Tops",
-        "product_name": "clasic black jean",
-        "product_price": "120.00",
-        "product_quantity": "8",
-        "product_location": "..\/product_img\/p64.jpeg"
-    },
-    {
-        "product_id": "0010",
-        "product_category": "Vintage Jackets",
-        "product_name": "Rachel Green inspired jacket",
-        "product_price": "160.00",
-        "product_quantity": "1",
-        "product_location": "..\/product_img\/p65.jpeg"
+        "product_category": "Arduino ",
+        "product_name": "HC-SR04 Ultrasonic Sensor",
+        "product_price": 100,
+        "product_quantity": 4,
+        "product_location": "..\/product_img\/p49.png"
     },
     {
         "product_id": "0011",
-        "product_category": "Vintage Tops",
-        "product_name": "burgundy blouse",
-        "product_price": "90.00",
-        "product_quantity": "8",
-        "product_location": "..\/product_img\/p66.jpeg"
+        "product_category": "Arduino ",
+        "product_name": "Raspberry Pi 4 Model B 4GB",
+        "product_price": 12960,
+        "product_quantity": 4,
+        "product_location": "..\/product_img\/p51.png"
+    },
+    {
+        "product_id": "0012",
+        "product_category": "Arduino ",
+        "product_name": "Night Vision Camera for Raspberry Pi",
+        "product_price": 2930,
+        "product_quantity": 4,
+        "product_location": "..\/product_img\/p52.jpeg"
+    },
+    {
+        "product_id": "0013",
+        "product_category": "Arduino ",
+        "product_name": "Acrylic Case for Raspberry Pi 4 Model B",
+        "product_price": 270,
+        "product_quantity": 4,
+        "product_location": "..\/product_img\/p53.jpeg"
+    },
+    {
+        "product_id": "0014",
+        "product_category": "Arduino ",
+        "product_name": "WiFi Relay Module ESP8266 5V",
+        "product_price": 375,
+        "product_quantity": 5,
+        "product_location": "..\/product_img\/p54.jpeg"
     }
 ]

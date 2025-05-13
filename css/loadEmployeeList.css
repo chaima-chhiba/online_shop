@@ -1,89 +1,197 @@
-/* Add these styles to your loadProduct.css file */
-
 body {
-  font-family: var(--font-body);
-  background-color: var(--light);
-  color: var(--dark);
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
   margin: 0;
-  padding: 0;
+  padding: 20px;
 }
 
 .container {
   max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+  margin: auto;
 }
 
-.site-header {
-  background-color: var(--header-bg);
-  color: var(--light);
-  padding: 20px 0;
-  margin-bottom: 30px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.site-header h1 {
-  font-family: var(--font-heading);
-  margin: 0;
-  font-size: 2.2em;
-  font-weight: 500;
+h1,
+h2 {
   text-align: center;
+  color: #333;
 }
 
-main.container {
-  padding-bottom: 50px;
+.table-container {
+  max-height: 400px;
+  overflow-y: auto; /* Enable vertical scrolling */
+  border: 1px solid #ccc;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 8px;
 }
 
-/* Enhanced product card styling */
-.product-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(74, 60, 48, 0.15);
+th {
+   background-color: #a87c50; /* Primary brown */
+  color: #f5f1ec; 
+  font-weight: bold;
 }
 
-.product-card h3 {
-  font-weight: 500;
+td {
+  background-color: #f9f9f9;
 }
 
-.product-card button {
-  font-family: var(--font-body);
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  font-size: 0.9em;
+tr:nth-child(even) td {
+  background-color: #d9c3b0; /* Secondary beige */
 }
 
-/* Enhanced pagination styling */
-.pagination {
-  margin-top: 40px;
+tr:hover {
+  background-color: #f1f1f1;
 }
 
-.pagination button {
-  font-family: var(--font-body);
-  font-weight: 600;
-  min-width: 120px;
-  transition: all 0.3s ease;
+/* Red color for confidential data (password) */
+td[style="color:red;"] {
+  color: red;
+}
+/* ---------------------------- */
+
+/* Style for no data found message */
+/* Table styles */
+#employeeTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
 }
 
-/* Loading state */
-.loading {
+p {
+  font-size: 18px;
+  color: #888;
   text-align: center;
-  padding: 40px;
-  font-family: var(--font-heading);
-  color: var(--primary);
-  font-size: 1.5em;
+  margin-top: 20px;
 }
 
-/* Toast styling to match theme */
-.toast {
-  background-color: var(--primary);
-  color: var(--light);
+/* Table cell wrap */
+td {
+  word-wrap: break-word;
+  max-width: 150px;
+  overflow: hidden;
+}
+
+/* ---------------------- */
+a {
+  padding: 6px 12px;
+  font-size: 14px;
+  text-decoration: none;
+  color: #007bff;
+  margin: 0 5px;
   border-radius: 4px;
+  display: inline-block;
+  text-align: center;
+}
+
+a:hover {
+  background-color: #f1f1f1;
+}
+
+a[title="Edit"] {
+   color: #8c5e37;
+}
+
+a[title="Edit"]:hover {
+  color: #f5f1ec; /* Light cream */
+  background-color: #8c5e37; 
+}
+
+a[title="Delete"] {
+   color: #c13c2e; /* Slightly muted red */
+
+}
+
+a[title="Delete"]:hover {
+    color: #f5f1ec; /* Light cream */
+    background-color: #c13c2e; 
+}
+
+/* Ensures the buttons inside table cells are in one line */
+table td a {
+  display: inline-block;
+  margin: 0 5px; /* Adjust spacing between buttons */
+}
+
+/* ============= */
+
+.form-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-container label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-container input,
+.form-container select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.form-container button {
+  width: 100%;
+  background-color: #a87c50; /* Primary brown */
+  color: #f5f1ec;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.form-container button:hover {
+  background-color: #8c5e37; 
+}
+
+/* --------- */
+
+/* General styling for the search input box */
+.searchBox {
+  width: 123%;
   padding: 12px 20px;
-  margin-bottom: 10px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-  font-family: var(--font-body);
+  margin: 10px 0;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Styling when the input is focused */
+.searchBox:focus {
+  border-color: #4caf50;
+  outline: none;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+/* Placeholder text styling */
+.searchBox::placeholder {
+  color: #888;
+  font-style: italic;
+}
+
+/* Optional - to target the specific input with ID */
+#EmployeeSearchBox {
+  font-family: Arial, sans-serif;
 }

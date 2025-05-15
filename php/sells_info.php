@@ -1,26 +1,32 @@
 <?php
 include 'db_connection.php';
 
-$sql = "SELECT sell_id, customer_mobile_number, price, DATE_FORMAT(time, '%Y-%m') as month, payment_method FROM sells";
-$result = $conn->query($sql);
+try {
+    // Create PDO connection
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8mb4", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$sells_data = [];
-$monthly_sales = [];
+    $sql = "SELECT sell_id, customer_mobile_number, price, DATE_FORMAT(time, '%Y-%m') as month, payment_method FROM sells";
+    $stmt = $conn->query($sql);
 
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
+    $sells_data = [];
+    $monthly_sales = [];
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $sells_data[] = $row;
 
         $month = $row['month'];
-        $price = $row['price'];
+        $price = (float) $row['price'];
+
         if (!isset($monthly_sales[$month])) {
             $monthly_sales[$month] = 0;
         }
         $monthly_sales[$month] += $price;
     }
-}
 
-$conn->close();
+} catch (PDOException $e) {
+    die("Database error: " . $e->getMessage());
+}
 ?>
 
 <!DOCTYPE html>

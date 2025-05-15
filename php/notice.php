@@ -2,52 +2,56 @@
 // Database configuration
 include 'db_connection.php';
 
-// Connect to the database
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8mb4", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
 }
 
-$message = ""; 
+$message = "";
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['add'])) {
         $notice_id = $_POST['notice_id'];
         $notice_content = $_POST['notice_content'];
 
-        $sql = "INSERT INTO notice (notice_id, notice_content) VALUES ('$notice_id', '$notice_content')";
-        if (mysqli_query($conn, $sql)) {
+        $sql = "INSERT INTO notice (notice_id, notice_content) VALUES (:notice_id, :notice_content)";
+        $stmt = $conn->prepare($sql);
+        if ($stmt->execute([':notice_id' => $notice_id, ':notice_content' => $notice_content])) {
             $message = "Notice added successfully!";
         } else {
-            $message = "Error: " . mysqli_error($conn);
+            $message = "Error adding notice.";
         }
     } elseif (isset($_POST['update'])) {
-        // Update notice
         $notice_id = $_POST['notice_id'];
         $notice_content = $_POST['notice_content'];
 
-        $check_sql = "SELECT * FROM notice WHERE notice_id = '$notice_id'";
-        $check_result = mysqli_query($conn, $check_sql);
+        // Check if notice exists
+        $check_sql = "SELECT * FROM notice WHERE notice_id = :notice_id";
+        $check_stmt = $conn->prepare($check_sql);
+        $check_stmt->execute([':notice_id' => $notice_id]);
 
-        if (mysqli_num_rows($check_result) > 0) {
-            $sql = "UPDATE notice SET notice_content = '$notice_content' WHERE notice_id = '$notice_id'";
-            if (mysqli_query($conn, $sql)) {
+        if ($check_stmt->rowCount() > 0) {
+            $sql = "UPDATE notice SET notice_content = :notice_content WHERE notice_id = :notice_id";
+            $stmt = $conn->prepare($sql);
+            if ($stmt->execute([':notice_id' => $notice_id, ':notice_content' => $notice_content])) {
                 $message = "Notice updated successfully!";
             } else {
-                $message = "Error: " . mysqli_error($conn);
+                $message = "Error updating notice.";
             }
         } else {
             $message = "Notice ID not found for update!";
         }
     } elseif (isset($_POST['delete'])) {
-        // Delete notice
         $notice_id = $_POST['notice_id'];
 
-        $sql = "DELETE FROM notice WHERE notice_id = '$notice_id'";
-        if (mysqli_query($conn, $sql)) {
+        $sql = "DELETE FROM notice WHERE notice_id = :notice_id";
+        $stmt = $conn->prepare($sql);
+        if ($stmt->execute([':notice_id' => $notice_id])) {
             $message = "Notice deleted successfully!";
         } else {
-            $message = "Error: " . mysqli_error($conn);
+            $message = "Error deleting notice.";
         }
     }
 }
@@ -55,13 +59,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Fetch all notices
 $notices = [];
 $sql = "SELECT * FROM notice";
-$result = mysqli_query($conn, $sql);
-if ($result) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        $notices[] = $row;
-    }
+$stmt = $conn->query($sql);
+if ($stmt) {
+    $notices = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

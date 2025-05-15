@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const shippingCostElement = document.getElementById("shipping-cost");
     const totalAmountElement = document.getElementById("total-amount");
 
-    const SHIPPING_COST = 40.00; // Fixed shipping cost
+    const SHIPPING_COST = 10.00; // Fixed shipping cost
 
     const fetchProductDetails = async (productId) => {
         try {
@@ -50,13 +50,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 <img src="${productDetails.product_location}" alt="Product Image" width="50">
                 ${productDetails.product_name}
             </td>
-            <td>৳${productPrice.toFixed(2)}</td>
+            <td>TND${productPrice.toFixed(2)}</td>
             <td>
                 <button class="decrement" data-product-id="${productId}">-</button>
                 <span>${quantity}</span>
                 <button class="increment" data-product-id="${productId}">+</button>
             </td>
-            <td>৳${itemTotal.toFixed(2)}</td>
+            <td>TND${itemTotal.toFixed(2)}</td>
             <td>
                 <button class="remove" data-product-id="${productId}">Remove</button>
             </td>

@@ -62,9 +62,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Update the order summary and hidden input
     orderDetailsList.innerHTML = `
-        <li>Subtotal: ৳${cost.toFixed(2)}</li>
-        <li>Shipping Cost: ৳${shippingCost.toFixed(2)}</li>
+        <li>Subtotal: TND${cost.toFixed(2)}</li>
+        <li>Shipping Cost: TND${shippingCost.toFixed(2)}</li>
     `;
-    totalSummary.textContent = `Total: ৳${totalCost.toFixed(2)}`;
+    totalSummary.textContent = `Total: TND${totalCost.toFixed(2)}`;
     totalCostInput.value = totalCost.toFixed(2);
 });

@@ -1,15 +1,24 @@
+:root {
+  --primary: #a87c50;
+  --secondary: #d9c3b0;
+  --accent: #8c5e37;
+  --light: #f5f1ec;
+  --dark: #4a3c30;
+  --header-bg: #714f31;
+}
+
 /* General Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
-    color: #333;
+    background-color: var(--light);
+    color: var(--dark);
 }
 
 header {
-    background-color: #a87c50;
-    color: white;
+    background-color: var(--header-bg); /* Changed to match admin dashboard */
+    color: var(--light);
     text-align: center;
     padding: 1em;
     position: relative;
@@ -17,6 +26,7 @@ header {
 
 header h1 {
     margin: 0;
+    color: var(--secondary); /* Added to match admin dashboard */
 }
 
 /* Go Back Button */
@@ -24,19 +34,20 @@ header h1 {
     position: absolute;
     top: 20px;
     right: 20px;
-    background-color: #f4f4f4;
-    color: #a87c50;
+    background-color: var(--secondary); /* Changed to match admin dashboard */
+    color: var(--dark); /* Changed to match admin dashboard */
     border: none;
     padding: 10px 15px;
-    border-radius: 5px;
+    border-radius: 25px; /* Changed to match admin dashboard */
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: all 0.3s ease; /* Changed to match admin dashboard */
 }
 
 .go-back-btn:hover {
-    background-color: #036666;
-    color: white;
+    background-color: #c8b39e; /* Changed to match admin dashboard */
+    color: var(--dark); /* Changed to match admin dashboard */
+    transform: scale(1.05); /* Added to match admin dashboard */
 }
 
 /* Admin Panel */
@@ -49,6 +60,7 @@ header h1 {
 
 .admin-panel h2 {
     margin-bottom: 20px;
+    color: var(--dark);
 }
 
 /* Search Form */
@@ -59,22 +71,24 @@ header h1 {
 .search-form input {
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--secondary);
     margin-right: 10px;
 }
 
 .search-form button {
     padding: 10px 15px;
-    background-color: #a87c50;
-    color: white;
+    background-color: var(--primary);
+    color: var(--light);
     border: none;
-    border-radius: 5px;
+    border-radius: 25px; /* Changed to match admin dashboard */
     cursor: pointer;
+    transition: all 0.3s ease; /* Changed to match admin dashboard */
 }
 
 .search-form button:hover {
-    background-color:#f5f1ec;
-
+    background-color: var(--accent); /* Changed to match admin dashboard */
+    transform: translateY(-2px); /* Added to match admin dashboard */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added to match admin dashboard */
 }
 
 /* Order Table */
@@ -86,30 +100,39 @@ header h1 {
 
 .order-table th, .order-table td {
     padding: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--secondary);
     text-align: center;
 }
 
 .order-table th {
-    background-color:#a87c50;
-    color: white;
+    background-color: var(--primary);
+    color: var(--light);
 }
 
 .order-table td button {
-    background-color: #ff4d4d;
-    color: white;
-    padding: 5px 10px;
+    background-color: var(--accent);
+    color: var(--light);
+    padding: 8px 16px; /* Slightly adjusted to match admin dashboard */
     border: none;
-    border-radius: 5px;
+    border-radius: 25px; /* Changed to match admin dashboard */
     cursor: pointer;
+    transition: all 0.3s ease; /* Changed to match admin dashboard */
 }
 
 .order-table td button:hover {
-    background-color: #cc0000;
+    background-color: var(--dark);
+    transform: translateY(-2px); /* Added to match admin dashboard */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Added to match admin dashboard */
 }
 
 .order-table select {
     padding: 5px;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--secondary);
+}
+
+/* Left Panel Styles (if exists in your HTML) */
+.left-section {
+    background-color: var(--secondary); /* Added to match admin dashboard */
+    border-right: 1px solid rgba(140, 94, 55, 0.1); /* Added to match admin dashboard */
 }

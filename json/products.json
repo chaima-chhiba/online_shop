@@ -4,7 +4,7 @@
         "product_category": "Vintage Dresses",
         "product_name": "Swing Dress",
         "product_price": "150.00",
-        "product_quantity": "4",
+        "product_quantity": "8",
         "product_location": "..\/product_img\/p55.jpg"
     },
     {
@@ -82,9 +82,9 @@
     {
         "product_id": "0011",
         "product_category": "Vintage Tops",
-        "product_name": "burgundy blouse",
-        "product_price": "90.00",
-        "product_quantity": "8",
-        "product_location": "..\/product_img\/p66.jpeg"
+        "product_name": "Forest top",
+        "product_price": "55.00",
+        "product_quantity": "6",
+        "product_location": "..\/product_img\/p67.jpeg"
     }
 ]

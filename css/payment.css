@@ -1,33 +1,43 @@
+:root {
+  --primary: #a87c50;    /* Main brand color */
+  --secondary: #d9c3b0;  /* Light neutral */
+  --accent: #8c5e37;     /* Darker shade for accents */
+  --light: #f5f1ec;      /* Light background */
+  --dark: #2c2418;       /* Dark text color */
+}
+
 /* General Styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #8b85b2;
+  background-color: var(--secondary);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  color: var(--dark); /* Added base text color */
 }
 
 .payment-container {
-  background-color: #ffffff;
+  background-color: var(--light);
   padding: 20px 30px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   max-width: 500px;
   text-align: center;
+  border: 1px solid var(--primary); /* Added border for definition */
 }
 
 .payment-container h1 {
   font-size: 24px;
-  color: #4caf50;
+  color: var(--primary);
   margin-bottom: 10px;
 }
 
 .payment-container p {
   font-size: 14px;
-  color: #666;
+  color: var(--dark); /* Changed from accent to dark for better readability */
   margin-bottom: 20px;
 }
 
@@ -43,20 +53,20 @@ body {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
-  color: #555;
+  color: var(--dark); /* Changed from #555 */
 }
 
 .form-group input[type="text"],
 .form-group input[type="date"] {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--secondary); /* Changed from #ddd */
   border-radius: 4px;
   font-size: 14px;
 }
 
 button[type="submit"] {
-  background-color: #4caf50;
+  background-color: var(--primary); /* Changed from #4caf50 */
   color: white;
   padding: 10px 15px;
   border: none;
@@ -67,7 +77,7 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background-color: #45a049;
+  background-color: var(--accent); /* Changed from #45a049 */
 }
 
 /* Radio Buttons */
@@ -79,20 +89,13 @@ button[type="submit"]:hover {
 .payment-form label {
   display: inline-block;
   margin-bottom: 8px;
-  color: #333;
+  color: var(--dark); /* Changed from #333 */
   cursor: pointer;
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 480px) {
-  .form-group {
-    width: 100%;
-  }
-}
-
 .order-summary {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
+  background-color: var(--light); /* Changed from #f9f9f9 */
+  border: 1px solid var(--secondary); /* Changed from #ddd */
   padding: 15px;
   border-radius: 5px;
   margin-bottom: 20px;
@@ -101,7 +104,7 @@ button[type="submit"]:hover {
 
 .order-summary h2 {
   font-size: 18px;
-  color: #333;
+  color: var(--dark); /* Changed from #333 */
   margin-bottom: 10px;
 }
 
@@ -113,12 +116,19 @@ button[type="submit"]:hover {
 
 .order-summary ul li {
   font-size: 14px;
-  color: #555;
+  color: var(--accent); /* Changed from #555 */
   margin-bottom: 5px;
 }
 
 .order-summary h3 {
   font-size: 16px;
-  color: #4caf50;
+  color: var(--primary); /* Changed from #4caf50 */
   font-weight: bold;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .form-group {
+    width: 100%;
+  }
 }

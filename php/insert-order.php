@@ -89,7 +89,7 @@ try {
                 <div class='order-slip'>
                     <h2>Order Placed Successfully!</h2>
                     <p>Your Order ID is: <strong>$newOrderId</strong></p>
-                    <p>Total Cost: <strong>৳$totalCost</strong></p>
+                    <p>Total Cost: <strong>TND$totalCost</strong></p>
                     <p>Payment Method: <strong>$paymentMethod</strong></p>
                     <button onclick='window.print();'>Print this Page</button>
                     <button onclick='window.location.href = "../index.html";'>Go back to Home page</button>

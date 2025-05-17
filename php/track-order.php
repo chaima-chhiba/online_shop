@@ -49,7 +49,7 @@ try {
                     <div class="order-card">
                         <h3>Order ID: <?php echo htmlspecialchars($row['order_id']); ?></h3>
                         <p><strong>Payment Method:</strong> <?php echo htmlspecialchars(ucfirst($row['payment_method'])); ?></p>
-                        <p><strong>Total Cost:</strong> $<?php echo htmlspecialchars(number_format($row['total_cost'], 2)); ?></p>
+                        <p><strong>Total Cost:</strong> TND<?php echo htmlspecialchars(number_format($row['total_cost'], 2)); ?></p>
                         <p><strong>Order Status:</strong> <?php echo htmlspecialchars(ucfirst($row['order_status'])); ?></p>
                         <button onclick="window.print();">Print Order Details</button>
                     </div>

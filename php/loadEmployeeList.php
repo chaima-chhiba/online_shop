@@ -17,15 +17,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_employee'])) {
     $employee_role = $_POST['employee_role'];
     $employee_salary = $_POST['employee_salary'];
 
-    $sql = "UPDATE employee SET 
-            employee_mobile_number = '$employee_mobile_number',
-            employee_email = '$employee_email',ss
-            employee_name = '$employee_name',
-            employee_gender = '$employee_gender',
-            employee_address = '$employee_address',
-            employee_role = '$employee_role',
-            employee_salary = '$employee_salary'
-            WHERE employee_id = '$employee_id'";
+$sql = "UPDATE employee SET 
+        employee_mobile_number = '$employee_mobile_number',
+        employee_email = '$employee_email',
+        employee_name = '$employee_name',
+        employee_gender = '$employee_gender',
+        employee_address = '$employee_address',
+        employee_role = '$employee_role',
+        employee_salary = '$employee_salary'
+        WHERE employee_id = '$employee_id'";
 
     if ($conn->query($sql) === TRUE) {
         echo "<script>alert('Employee updated successfully!');</script>";

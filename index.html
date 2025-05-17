@@ -37,31 +37,21 @@
         </div>
     </header>
 
-    <nav>
-        <a href="#">Home</a>
-        <a href="#">Accessories</a>
-        <a href="#">Our Story</a>
-    </nav>
+  
 
     <div id="search_results"></div>
 
     <main class="full">
         <section class="left-section">
-            <h3 class="category-title">Shop by Era</h3>
-            <button class="btn-category">1950s - Rockabilly & Pin-up</button>
-            <button class="btn-category">1960s - Mod & Hippie</button>
-            <button class="btn-category">1970s - Disco & Bohemian</button>
-            <button class="btn-category">1980s - New Wave & Punk</button>
-            <button class="btn-category">1990s - Grunge & Minimalist</button>
-            <button class="btn-category">Y2K - 2000s Nostalgia</button>
+          
 
             <h3 class="category-title" style="margin-top: 30px;">Shop by Category</h3>
-            <button class="btn-category">Dresses</button>
-            <button class="btn-category">Tops & Blouses</button>
-            <button class="btn-category">Bottoms</button>
-            <button class="btn-category">Outerwear</button>
-            <button class="btn-category">Accessories</button>
-            <button class="btn-category">View All</button>
+           <button class="btn-category" data-category="Vintage Dresses">Dresses</button>
+<button class="btn-category" data-category="Vintage Tops">Tops & Blouses</button>
+<button class="btn-category" data-category="Vintage Jeans">Bottoms</button>
+<button class="btn-category" data-category="Vintage Jackets">Outerwear</button>
+<button class="btn-category" data-category="Accessories">Accessories</button>
+<button class="btn-category" data-category="all">View All</button>
             
             <div style="margin-top: 30px;">
                 <h3 class="category-title">Announcements</h3>
@@ -78,11 +68,7 @@
                 
             <div class="newsletter-section">
                 <h3 class="newsletter-title">Join Our Vintage Community</h3>
-                <p>Subscribe for exclusive offers, first dibs on new arrivals, and styling tips.</p>
-                <div class="newsletter-form">
-                    <input type="email" class="newsletter-input" placeholder="Enter your email address">
-                    <button class="newsletter-btn">Subscribe</button>
-                </div>
+              
             </div>
         </section>
     </main>
@@ -93,10 +79,10 @@
                 <h3 class="footer-title">Retro Revival</h3>
                 <p>Curating authentic vintage clothing from the 1950s to the 2000s. Each piece tells a story and brings history to your wardrobe.</p>
                 <div class="social-links">
-                    <a href="#" class="social-icon"><img src="/resource/instagram.png" alt="Instagram"></a>
-                    <a href="#" class="social-icon"><img src="/resource/social.png" alt="Pinterest"></a>
-                    <a href="#" class="social-icon"><img src="/resource/tik-tok.png" alt="TikTok"></a>
-                    <a href="#" class="social-icon"><img src="/resource/facebook.png" alt="Facebook"></a>
+                    <a href="#" class="social-icon"><img src="./resource/instagram.png" alt="Instagram"></a>
+                    <a href="#" class="social-icon"><img src="./resource/pinterest-logo.png" alt="Pinterest"></a>
+                    <a href="#" class="social-icon"><img src="./resource/tik-tok.png" alt="TikTok"></a>
+                    <a href="#" class="social-icon"><img src="./resource/facebook.png" alt="Facebook"></a>
                 </div>
             </div>
             <div class="footer-section">
@@ -136,6 +122,9 @@
     </footer>
 
     <div id="toast-container"></div>
+
+    <!-- Add the searchProduct.js script first -->
+    <script src="js/searchProduct.js"></script>
 
     <script>
         // Fetch notices from the server
@@ -187,26 +176,38 @@
         searchBar.addEventListener('keydown', function(event) {
             if (event.key === 'Enter') {
                 const query = searchBar.value.trim();
+                console.log("Enter pressed");
+
                 if (!query) {
-                    showToast("Please enter a search term");
+                    showToast("Search field cannot be empty!");
+                    event.preventDefault();
                     return;
                 }
-                showToast(`Searching for: ${query}`);
-                // In a real implementation, you would handle the search here
+
+                // Store the search query for the results page
+                localStorage.setItem('searchQuery', query);
+                window.location.href = 'html/show-search-product.html';
             }
         });
 
         // Load notices on page load
         document.addEventListener('DOMContentLoaded', fetchNotices);
 
-        // Category button functionality - the View All button has its own onclick handler
-        document.querySelectorAll('.btn-category:not([onclick])').forEach(button => {
-            button.addEventListener('click', function() {
-                showToast(`Browsing: ${this.textContent}`);
-                // In a real implementation, you would handle the category filtering here
-            });
-        });
+     // Category button functionality
+document.querySelectorAll('.btn-category').forEach(button => {
+    button.addEventListener('click', function() {
+        const category = this.getAttribute('data-category');
+        const iframe = document.getElementById('productLoader');
+        
+        // Send message to iframe with the selected category
+        iframe.contentWindow.postMessage({
+            type: 'filter',
+            category: category
+        }, '*');
+        
+        showToast(`Showing: ${this.textContent}`);
+    });
+});
     </script>
 </body>
-
 </html>

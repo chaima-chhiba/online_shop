@@ -106,7 +106,7 @@ try {
                             <tr>
                                 <td><?php echo htmlspecialchars($row['order_id']); ?></td>
                                 <td><?php echo htmlspecialchars($row['customer_mobile_number']); ?></td>
-                                <td>$<?php echo number_format($row['total_cost'], 2); ?></td>
+                                <td>TND<?php echo number_format($row['total_cost'], 2); ?></td>
                                 <td><?php echo ucfirst(htmlspecialchars($row['payment_method'])); ?></td>
                                 <td>
                                     <form method="POST" action="">

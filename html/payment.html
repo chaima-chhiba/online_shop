@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Page</title>
     <link rel="stylesheet" href="../css/payment.css">
-    <link rel="icon" type="image/png" href="../resource/home.png">
+    <link rel="icon" type="image/png" href="../resource/logo.png">
 
 </head>
 
@@ -30,10 +30,7 @@
                     <input type="radio" id="method-card" name="payment-method" value="card" onclick="togglePaymentFields()" required>
                     <label for="method-card">Card</label>
                 </div>
-                <div>
-                    <input type="radio" id="method-bkash" name="payment-method" value="bkash" onclick="togglePaymentFields()" required>
-                    <label for="method-bkash">Bkash</label>
-                </div>
+              
                 <div>
                     <input type="radio" id="method-cash" name="payment-method" value="cash" onclick="togglePaymentFields()" required>
                     <label for="method-cash">Cash on Delivery</label>
@@ -58,19 +55,6 @@
                         <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="3" pattern="\d{3}"
                             title="CVV must be 3 digits">
                     </div>
-                </div>
-            </div>
-
-            <!-- Bkash Payment Fields -->
-            <div id="bkash-fields" style="display: none;">
-                <div class="form-group">
-                    <label for="bkash-number">Bkash Mobile Number</label>
-                    <input type="text" id="bkash-number" name="bkash-number" placeholder="Enter your Bkash number" maxlength="11"
-                        pattern="\d{11}" title="Bkash number must be 11 digits">
-                </div>
-                <div class="form-group">
-                    <label for="bkash-transaction-id">Transaction ID</label>
-                    <input type="text" id="bkash-transaction-id" name="bkash-transaction-id" placeholder="Enter your transaction ID">
                 </div>
             </div>
 

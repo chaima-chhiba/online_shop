@@ -3,7 +3,7 @@
         "product_id": "0001",
         "product_category": "Vintage Dresses",
         "product_name": "Swing Dress",
-        "product_price": "150.00",
+        "product_price": "140.00",
         "product_quantity": "8",
         "product_location": "..\/product_img\/p55.jpg"
     },
@@ -25,7 +25,7 @@
     },
     {
         "product_id": "0004",
-        "product_category": "Vintage Tops",
+        "product_category": "Vintage Jeans",
         "product_name": "1970s High-Waisted Flared Jeans (Vintage Levi\u2019s)",
         "product_price": "200.00",
         "product_quantity": "3",
@@ -33,7 +33,7 @@
     },
     {
         "product_id": "0005",
-        "product_category": "Vintage Tops",
+        "product_category": "Vintage Skirts",
         "product_name": "Khaki 1930s Plants Double Mesh Fishtail Skirt",
         "product_price": "50.00",
         "product_quantity": "1",
@@ -41,7 +41,7 @@
     },
     {
         "product_id": "0006",
-        "product_category": "Vintage Tops",
+        "product_category": "Vintage Skirts",
         "product_name": "mini vintage skirt",
         "product_price": "80.00",
         "product_quantity": "6",
@@ -65,7 +65,7 @@
     },
     {
         "product_id": "0009",
-        "product_category": "Vintage Tops",
+        "product_category": "Vintage Jeans",
         "product_name": "clasic black jean",
         "product_price": "120.00",
         "product_quantity": "8",

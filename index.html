@@ -128,28 +128,31 @@
 
     <script>
         // Fetch notices from the server
-        function fetchNotices() {
+         function fetchNotices() {
             const container = document.getElementById('notice-container');
             container.innerHTML = '<p>Loading announcements...</p>'; // Show loading text
 
-            // Simulate fetch with sample notices for now
-            setTimeout(() => {
-                container.innerHTML = ''; // Clear the loading text
-                
-                // Sample notices
-                const notices = [
-                    {notice_content: "Free shipping on orders over $100!"},
-                    {notice_content: "20% off 1970s collection this week only!"},
-                    {notice_content: "New Y2K items just added to the store."}
-                ];
-                
-                notices.forEach(notice => {
-                    const noticeDiv = document.createElement('div');
-                    noticeDiv.className = 'notice-item';
-                    noticeDiv.innerHTML = `<p>${notice.notice_content}</p>`;
-                    container.appendChild(noticeDiv);
+            fetch('php/fetch_notice.php')
+                .then(response => response.json())
+                .then(data => {
+                    container.innerHTML = ''; // Clear the loading text
+                    if (data.length > 0) {
+                        data.forEach(notice => {
+                            const noticeDiv = document.createElement('div');
+                            noticeDiv.className = 'notice-item';
+                            noticeDiv.innerHTML = `
+                                <p>${notice.notice_content}</p>
+                            `;
+                            container.appendChild(noticeDiv);
+                        });
+                    } else {
+                        container.innerHTML = '<p>No notices found.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching notices:', error);
+                    container.innerHTML = '<p>Failed to load announcements.</p>';
                 });
-            }, 500);
         }
 
         // Function to show toast notification

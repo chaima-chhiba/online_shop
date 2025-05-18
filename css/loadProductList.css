@@ -1,47 +1,29 @@
-#customerSearchInput {
-  width: 100%;
-  /* Full width of its container */
-  padding: 12px 20px;
-  /* Add padding for a larger clickable area */
-  margin: 10px 0;
-  /* Add some margin around the input */
-  box-sizing: border-box;
-  /* Ensure padding doesn't affect width calculation */
-  border: 2px solid #ccc;
-  /* Light gray border */
-  border-radius: 8px;
-  /* Rounded corners */
-  font-size: 16px;
-  /* Set font size */
-  transition: border-color 0.3s ease;
-  /* Smooth transition when border color changes */
-}
-
-#customerSearchInput:focus {
-  border-color: #f5f1ec;
-  /* Change border color on focus */
-  outline: none;
-  /* Remove the default focus outline */
-}
-
-#customerSearchInput::placeholder {
-  color: #888;
-  /* Lighter placeholder text color */
-  font-style: italic;
-  /* Make placeholder text italic */
-}
-
-/* General styles */
 body {
   font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+  margin: 20px;
   background-color: #f4f4f9;
   color: #333;
 }
 
-/* Container for the table and search box */
 .container {
+  display: flex;
+  max-width: 1200px;
+  margin: auto;
+  gap: 15px;
+}
+
+.product-list {
+  flex: 2; /* Takes 2/3 of the container */
+  max-height: 700px; /* Set a fixed height for the scroll view */
+  overflow-y: auto; /* Enable vertical scrolling */
+  border: 1px solid #ccc;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* Container for the table and search box */
+.product-list {
   width: 80%;
   margin: 20px auto;
   background-color: #fff;
@@ -51,7 +33,7 @@ body {
 }
 
 /* Table styles */
-table {
+#productTable {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
@@ -66,7 +48,7 @@ td {
 
 th {
   background-color: #a87c50; /* Primary brown */
-  color: #f5f1ec;
+  color: #f5f1ec; 
   font-weight: bold;
 }
 
@@ -88,12 +70,6 @@ tr td {
   overflow: hidden;
 }
 
-/* Scrollable table container */
-div {
-  overflow-y: auto;
-  max-height: 400px;
-}
-
 /* Style for no data found message */
 p {
   font-size: 18px;
@@ -101,41 +77,102 @@ p {
   text-align: center;
   margin-top: 20px;
 }
+
+/* Style for action buttons container */
+div[style="display: flex; gap: 3px; align-items: left;"] {
+  display: flex;
+  gap: 5px;
+}
+
 .form-container {
-  background: #fff;
+  flex: 0.7; /* Reduce the width (takes half of its original space) */
+  max-width: 330px; /* Set a maximum width to limit the size */
+  background: #f9f9f9;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.form-container label {
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-container form label {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
   font-weight: bold;
-  color: #333;
 }
 
-.form-container input,
-.form-container select {
+.form-container form input {
   width: 100%;
-  padding: 10px;
+  padding: 8px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 14px;
+  border-radius: 4px;
 }
 
-.form-container button {
+.form-container form button {
+  display: block;
   width: 100%;
-  background-color: #a87c50; /* Primary brown */
+  background-color: #a87c50; /* Changed to primary brown */
   color: #f5f1ec;
   padding: 10px;
   border: none;
-  border-radius: 5px;
-  font-size: 16px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
-.form-container button:hover {
-  background-color: #8c5e37; 
+.form-container form button:hover {
+  background: #8c5e37; /
+}
+
+.action-buttons {
+  white-space: nowrap;
+}
+
+.action-buttons form,
+.action-buttons a {
+  display: inline;
+}
+
+.action-buttons button,
+.action-buttons a {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 5px;
+}
+
+.action-buttons button {
+  color:  #8c5e37; /
+}
+
+.action-buttons a {
+  color:#a87c50;
+  text-decoration: none;
+}
+
+/* --------------- */
+
+#productSearchInput {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 10px 0;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+#productSearchInput:focus {
+  border-color: #4caf50;
+  outline: none;
+}
+
+#productSearchInput::placeholder {
+  color: #888;
+  font-style: italic;
 }

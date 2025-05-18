@@ -1,9 +1,16 @@
 let currentPage = 1; 
 let totalPages = 1;
+let currentCategory = 'all'; // Track the current category
 
-async function loadProducts(page = 1) {
+async function loadProducts(page = 1, category = currentCategory) {
   try {
-    const response = await fetch(`../php/loadProduct.php?page=${page}`);
+    // Add category to the query parameters if it's not 'all'
+    let url = `../php/loadProduct.php?page=${page}`;
+    if (category !== 'all') {
+      url += `&category=${encodeURIComponent(category)}`;
+    }
+    
+    const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
@@ -16,7 +23,7 @@ async function loadProducts(page = 1) {
     gridContainer.innerHTML = ""; 
 
     if (products.length === 0) {
-      gridContainer.innerHTML = "<p>No products available.</p>";
+      gridContainer.innerHTML = "<p>No products available in this category.</p>";
     } else {
       // Add products to the grid
       products.forEach((product) => {
@@ -50,6 +57,13 @@ async function loadProducts(page = 1) {
   }
 }
 
+// Function to filter products by category
+function filterByCategory(category) {
+  currentCategory = category;
+  currentPage = 1; // Reset to first page when changing categories
+  loadProducts(currentPage, currentCategory);
+}
+
 // Function to attach add-to-cart event handlers to buttons
 function attachAddToCartHandlers() {
   const buttons = document.querySelectorAll(".add-to-cart-button");
@@ -81,15 +95,23 @@ function disablePaginationButtons() {
 document.getElementById("prevPage").addEventListener("click", () => {
   if (currentPage > 1) {
     currentPage--;
-    loadProducts(currentPage); // Load the previous page
+    loadProducts(currentPage, currentCategory); // Load the previous page with current category
   }
 });
 
 document.getElementById("nextPage").addEventListener("click", () => {
   if (currentPage < totalPages) {
     currentPage++;
-    loadProducts(currentPage); // Load the next page
+    loadProducts(currentPage, currentCategory); // Load the next page with current category
   }
 });
 
-window.onload = () => loadProducts(currentPage);
+// Listen for messages from the parent window (index.html)
+window.addEventListener('message', function(event) {
+  // Check if the message is a filter request
+  if (event.data && event.data.type === 'filter') {
+    filterByCategory(event.data.category);
+  }
+});
+
+window.onload = () => loadProducts(currentPage, currentCategory);

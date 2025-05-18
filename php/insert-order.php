@@ -69,21 +69,21 @@ try {
                         text-align: center;
                     }
                     .order-slip h2 {
-                        color: green;
+                        color: maroon;
                     }
                     .order-slip p {
                         font-size: 16px;
                     }
                     .order-slip button {
                         padding: 10px 20px;
-                        background-color: #4CAF50;
+                        background-color:rgb(215, 200, 152);
                         color: white;
                         border: none;
                         cursor: pointer;
                         margin: 5px;
                     }
                     .order-slip button:hover {
-                        background-color: #45a049;
+                        background-color:rgb(219, 207, 146);
                     }
                 </style>
                 <div class='order-slip'>

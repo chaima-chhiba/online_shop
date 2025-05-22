@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Retro Revival | Vintage Clothing</title>
-     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Add cache control -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
 </head>
 
 <body>
@@ -27,7 +31,6 @@
             <a href="php/track-order.php" class="icon-button" title="Track Your Order">
                 <img src="resource/truck.png" alt="Track Order" class="icon">
             </a>
-          
             <a href="html/cartView.html" class="icon-button" title="Shopping Cart">
                 <img src="resource/cart.png" alt="Cart" class="icon">
             </a>
@@ -37,21 +40,17 @@
         </div>
     </header>
 
-  
-
     <div id="search_results"></div>
 
     <main class="full">
         <section class="left-section">
-          
-
             <h3 class="category-title" style="margin-top: 30px;">Shop by Category</h3>
-           <button class="btn-category" data-category="Vintage Dresses">Dresses</button>
-<button class="btn-category" data-category="Vintage Tops">Tops & Blouses</button>
-<button class="btn-category" data-category="Vintage Jeans">Bottoms</button>
-<button class="btn-category" data-category="Vintage Jackets">Outerwear</button>
-<button class="btn-category" data-category="Accessories">Accessories</button>
-<button class="btn-category" data-category="all">View All</button>
+            <button class="btn-category" data-category="Vintage Dresses">Dresses</button>
+            <button class="btn-category" data-category="Vintage Tops">Tops & Blouses</button>
+            <button class="btn-category" data-category="Vintage Jeans">Bottoms</button>
+            <button class="btn-category" data-category="Vintage Jackets">Outerwear</button>
+            <button class="btn-category" data-category="Accessories">Accessories</button>
+            <button class="btn-category" data-category="all">View All</button>
             
             <div style="margin-top: 30px;">
                 <h3 class="category-title">Announcements</h3>
@@ -68,7 +67,6 @@
                 
             <div class="newsletter-section">
                 <h3 class="newsletter-title">Join Our Vintage Community</h3>
-              
             </div>
         </section>
     </main>
@@ -127,22 +125,49 @@
     <script src="js/searchProduct.js"></script>
 
     <script>
+        // Clean any duplicate elements on page load
+        function cleanDuplicateElements() {
+            // Remove duplicate headers
+            const headers = document.querySelectorAll('header.top');
+            if (headers.length > 1) {
+                for (let i = 1; i < headers.length; i++) {
+                    headers[i].remove();
+                }
+            }
+            
+            // Remove duplicate footers
+            const footers = document.querySelectorAll('footer');
+            if (footers.length > 1) {
+                for (let i = 1; i < footers.length; i++) {
+                    footers[i].remove();
+                }
+            }
+            
+            // Remove duplicate toast containers
+            const toastContainers = document.querySelectorAll('#toast-container');
+            if (toastContainers.length > 1) {
+                for (let i = 1; i < toastContainers.length; i++) {
+                    toastContainers[i].remove();
+                }
+            }
+        }
+
         // Fetch notices from the server
-         function fetchNotices() {
+        function fetchNotices() {
             const container = document.getElementById('notice-container');
-            container.innerHTML = '<p>Loading announcements...</p>'; // Show loading text
+            if (!container) return;
+            
+            container.innerHTML = '<p>Loading announcements...</p>';
 
             fetch('php/fetch_notice.php')
                 .then(response => response.json())
                 .then(data => {
-                    container.innerHTML = ''; // Clear the loading text
+                    container.innerHTML = '';
                     if (data.length > 0) {
                         data.forEach(notice => {
                             const noticeDiv = document.createElement('div');
                             noticeDiv.className = 'notice-item';
-                            noticeDiv.innerHTML = `
-                                <p>${notice.notice_content}</p>
-                            `;
+                            noticeDiv.innerHTML = `<p>${notice.notice_content}</p>`;
                             container.appendChild(noticeDiv);
                         });
                     } else {
@@ -157,60 +182,75 @@
 
         // Function to show toast notification
         function showToast(message) {
+            const toastContainer = document.getElementById('toast-container');
+            if (!toastContainer) return;
+            
             const toast = document.createElement('div');
             toast.className = 'toast';
             toast.textContent = message;
-            document.getElementById('toast-container').appendChild(toast);
+            toastContainer.appendChild(toast);
             
-            // Remove toast after animation completes
             setTimeout(() => {
-                toast.remove();
+                if (toast.parentNode) {
+                    toast.remove();
+                }
             }, 3000);
-        }
-
-        // Load all products functionality
-        function loadAllProducts() {
-            const iframe = document.getElementById('productLoader');
-            iframe.contentWindow.location.reload();
         }
 
         // Search functionality
         const searchBar = document.getElementById('search_bar');
-        searchBar.addEventListener('keydown', function(event) {
-            if (event.key === 'Enter') {
-                const query = searchBar.value.trim();
-                console.log("Enter pressed");
+        if (searchBar) {
+            searchBar.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    const query = searchBar.value.trim();
 
-                if (!query) {
-                    showToast("Search field cannot be empty!");
-                    event.preventDefault();
-                    return;
+                    if (!query) {
+                        showToast("Search field cannot be empty!");
+                        event.preventDefault();
+                        return;
+                    }
+
+                    localStorage.setItem('searchQuery', query);
+                    window.location.href = 'html/show-search-product.html';
                 }
+            });
+        }
 
-                // Store the search query for the results page
-                localStorage.setItem('searchQuery', query);
-                window.location.href = 'html/show-search-product.html';
+        // Category button functionality
+        document.querySelectorAll('.btn-category').forEach(button => {
+            button.addEventListener('click', function() {
+                const category = this.getAttribute('data-category');
+                const iframe = document.getElementById('productLoader');
+                
+                if (iframe && iframe.contentWindow) {
+                    iframe.contentWindow.postMessage({
+                        type: 'filter',
+                        category: category
+                    }, '*');
+                    
+                    showToast(`Showing: ${this.textContent}`);
+                }
+            });
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            cleanDuplicateElements();
+            fetchNotices();
+        });
+
+        // Handle page show event (for back button)
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                cleanDuplicateElements();
+                fetchNotices();
             }
         });
 
-        // Load notices on page load
-        document.addEventListener('DOMContentLoaded', fetchNotices);
-
-     // Category button functionality
-document.querySelectorAll('.btn-category').forEach(button => {
-    button.addEventListener('click', function() {
-        const category = this.getAttribute('data-category');
-        const iframe = document.getElementById('productLoader');
-        
-        // Send message to iframe with the selected category
-        iframe.contentWindow.postMessage({
-            type: 'filter',
-            category: category
-        }, '*');
-        
-        showToast(`Showing: ${this.textContent}`);
-    });
-});
+        // Prevent multiple script executions
+        window.addEventListener('beforeunload', function() {
+            // Clean up any intervals or listeners if needed
+        });
     </script>
 </body>
 </html>

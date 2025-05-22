@@ -5,7 +5,8 @@
         "product_name": "Swing Dress",
         "product_price": "140.00",
         "product_quantity": "8",
-        "product_location": "..\/product_img\/p55.jpg"
+        "product_location": "..\/product_img\/p55.jpg",
+        "product_description": null
     },
     {
         "product_id": "0002",
@@ -13,7 +14,8 @@
         "product_name": "1980s Harley Davidson Motorcycle Jacket",
         "product_price": "75.00",
         "product_quantity": "6",
-        "product_location": "..\/product_img\/p56.jpeg"
+        "product_location": "..\/product_img\/p56.jpeg",
+        "product_description": null
     },
     {
         "product_id": "0003",
@@ -21,7 +23,8 @@
         "product_name": "Majestic Top",
         "product_price": "60.00",
         "product_quantity": "2",
-        "product_location": "..\/product_img\/p57.jpeg"
+        "product_location": "..\/product_img\/p57.jpeg",
+        "product_description": null
     },
     {
         "product_id": "0004",
@@ -29,7 +32,8 @@
         "product_name": "1970s High-Waisted Flared Jeans (Vintage Levi\u2019s)",
         "product_price": "200.00",
         "product_quantity": "3",
-        "product_location": "..\/product_img\/p58.jpg"
+        "product_location": "..\/product_img\/p58.jpg",
+        "product_description": null
     },
     {
         "product_id": "0005",
@@ -37,7 +41,8 @@
         "product_name": "Khaki 1930s Plants Double Mesh Fishtail Skirt",
         "product_price": "50.00",
         "product_quantity": "1",
-        "product_location": "..\/product_img\/p59.jpeg"
+        "product_location": "..\/product_img\/p59.jpeg",
+        "product_description": null
     },
     {
         "product_id": "0006",
@@ -45,7 +50,8 @@
         "product_name": "mini vintage skirt",
         "product_price": "80.00",
         "product_quantity": "6",
-        "product_location": "..\/product_img\/p60.jpeg"
+        "product_location": "..\/product_img\/p60.jpeg",
+        "product_description": null
     },
     {
         "product_id": "0007",
@@ -53,7 +59,8 @@
         "product_name": "1970s Pale Light  Cotton Voil",
         "product_price": "90.00",
         "product_quantity": "2",
-        "product_location": "..\/product_img\/p61.jpeg"
+        "product_location": "..\/product_img\/p61.jpeg",
+        "product_description": null
     },
     {
         "product_id": "0008",
@@ -61,7 +68,8 @@
         "product_name": "move dress",
         "product_price": "50.00",
         "product_quantity": "5",
-        "product_location": "..\/product_img\/p63.jpeg"
+        "product_location": "..\/product_img\/p63.jpeg",
+        "product_description": null
     },
     {
         "product_id": "0009",
@@ -69,7 +77,8 @@
         "product_name": "clasic black jean",
         "product_price": "120.00",
         "product_quantity": "8",
-        "product_location": "..\/product_img\/p64.jpeg"
+        "product_location": "..\/product_img\/p64.jpeg",
+        "product_description": null
     },
     {
         "product_id": "0010",
@@ -77,7 +86,8 @@
         "product_name": "Rachel Green inspired jacket",
         "product_price": "160.00",
         "product_quantity": "1",
-        "product_location": "..\/product_img\/p65.jpeg"
+        "product_location": "..\/product_img\/p65.jpeg",
+        "product_description": null
     },
     {
         "product_id": "0011",
@@ -85,6 +95,7 @@
         "product_name": "Forest top",
         "product_price": "55.00",
         "product_quantity": "6",
-        "product_location": "..\/product_img\/p67.jpeg"
+        "product_location": "..\/product_img\/p67.jpeg",
+        "product_description": null
     }
 ]

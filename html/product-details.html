@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details | Retro Revival</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/toast.css">
+    <link rel="stylesheet" href="../css/product-details.css">
+    <link rel="icon" type="image/png" href="../resource/Logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+</head>
+<body>
+    <main>
+        <div class="product-details-container">
+            <a href="#" class="back-link" onclick="goBackSafely(event)">← Back to Products</a>
+            <div class="product-details-image">
+                <img id="productImage" src="" alt="Product Image">
+            </div>
+            <div class="product-details-info">
+                <h2 id="productName"></h2>
+                <p class="price" id="productPrice"></p>
+                <p id="productDescription"></p>
+                <button class="add-to-cart-button" id="addToCartButton" data-product-id="" data-product-name="">Add to Cart</button>
+            </div>
+        </div>
+        <div class="related-products">
+            <h3>Related Products</h3>
+            <div class="related-products-grid" id="relatedProductsGrid"></div>
+        </div>
+    </main>
+
+    <div id="toast-container"></div>
+
+    <script src="../js/add2cart.js"></script>
+    <script src="../js/toast.js"></script>
+    <script>
+        function goBackSafely(event) {
+            event.preventDefault();
+            document.body.style.display = 'none';
+            window.location.replace('../index.html');
+        }
+
+        async function fetchProductDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+
+            if (!productId) {
+                document.querySelector('.product-details-container').innerHTML = '<p>Product not found.</p>';
+                return;
+            }
+
+            try {
+                const response = await fetch(`../php/get-product-details.php?id=${productId}`);
+                if (!response.ok) throw new Error('Failed to fetch product details');
+                const product = await response.json();
+
+                if (product.error) {
+                    document.querySelector('.product-details-container').innerHTML = '<p>Product not found.</p>';
+                    return;
+                }
+
+                document.getElementById('productImage').src = product.product_location;
+                document.getElementById('productImage').alt = product.product_name;
+                document.getElementById('productName').textContent = product.product_name;
+                document.getElementById('productPrice').textContent = `TND ${product.product_price}`;
+                document.getElementById('productDescription').textContent = product.product_description || 'No description available.';
+                
+                const addToCartButton = document.getElementById('addToCartButton');
+                addToCartButton.setAttribute('data-product-id', product.product_id);
+                addToCartButton.setAttribute('data-product-name', product.product_name);
+                
+                attachSingleAddToCartHandler(addToCartButton);
+                
+                // Fetch related products
+                fetchRelatedProducts(productId);
+            } catch (error) {
+                console.error('Error fetching product:', error);
+                document.querySelector('.product-details-container').innerHTML = '<p>Failed to load product details.</p>';
+            }
+        }
+
+        async function fetchRelatedProducts(productId) {
+            try {
+                const response = await fetch(`../php/get-related-products.php?id=${productId}`);
+                if (!response.ok) throw new Error('Failed to fetch related products');
+                const products = await response.json();
+
+                const relatedProductsGrid = document.getElementById('relatedProductsGrid');
+                relatedProductsGrid.innerHTML = '';
+
+                if (products.error || products.length === 0) {
+                    relatedProductsGrid.innerHTML = '<p>No related products available.</p>';
+                    return;
+                }
+
+                products.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'related-product-card';
+                    productCard.innerHTML = `
+                        <img src="${product.product_location}" alt="${product.product_name}">
+                        <h4>${product.product_name}</h4>
+                        <p class="price">TND ${product.product_price}</p>
+                        <a href="product-details.html?id=${product.product_id}">View Product</a>
+                    `;
+                    relatedProductsGrid.appendChild(productCard);
+                });
+            } catch (error) {
+                console.error('Error fetching related products:', error);
+                document.getElementById('relatedProductsGrid').innerHTML = '<p>Unable to load related products.</p>';
+            }
+        }
+
+        function attachSingleAddToCartHandler(button) {
+            const newButton = button.cloneNode(true);
+            button.parentNode.replaceChild(newButton, button);
+            
+            newButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                if (this.disabled) return;
+                this.disabled = true;
+                
+                const productId = this.getAttribute('data-product-id');
+                const productName = this.getAttribute('data-product-name');
+                const quantity = 1;
+
+                console.log(`Adding to cart: ${productName} (ID: ${productId}, Quantity: ${quantity})`);
+                
+                try {
+                    if (typeof addToCartAlert === 'function') {
+                        addToCartAlert(productName);
+                    }
+                    if (typeof saveToCookie === 'function') {
+                        saveToCookie(productId, quantity);
+                    }
+                    if (typeof sendToServer === 'function') {
+                        sendToServer(productId, quantity);
+                    }
+                } catch (error) {
+                    console.error('Error adding to cart:', error);
+                }
+                
+                setTimeout(() => { 
+                    this.disabled = false; 
+                }, 1000);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.toast').forEach(toast => toast.remove());
+            fetchProductDetails();
+        });
+    </script>
+</body>
+</html>
+```

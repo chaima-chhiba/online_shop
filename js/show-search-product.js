@@ -25,7 +25,7 @@ async function loadProducts() {
                     <img src="${product.product_location}" alt="${product.product_name}">
                     <h3>${product.product_name}</h3>
                     <p>${product.product_category}</p>
-                    <p>$${product.product_price}</p>
+                    <p>TND${product.product_price}</p>
                     <button onclick="addToCart('${product.product_id}', '${product.product_name}')">Add to Cart</button>
                 `;
                 productContainer.appendChild(productDiv);
